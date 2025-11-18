@@ -1,15 +1,17 @@
 // components/NewsAndEvents.tsx
-
 "use client";
 
-import Link from "next/link"; // <-- මෙන්න Fix එක!
+import Link from "next/link";
 import { motion } from "framer-motion";
-import NewsCard from "./NewsCard"; // උඩින් හදපු Card එක
+import NewsCard from "./NewsCard";
+
+// Aluthen import kala
+import { Button } from "@/components/ui/button";
 
 export default function NewsAndEvents() {
   return (
     <motion.section
-      className="py-16 md:py-24 bg-gray-50" // පොඩි background-color එකක්
+      className="py-16 md:py-24 bg-gray-50"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.7 }}
@@ -25,22 +27,20 @@ export default function NewsAndEvents() {
           </p>
         </div>
 
-        {/* පස්සෙ Supabase වලින් data ගත්තම, මේක 'map' කරලා ඇතුලෙ data දාන්න.
-          දැනට අපි 3 පාරක් Card එක පෙන්නමු
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* NewsCard (Meka oya kalin hadapu nisa, wenasak nehe) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
           <NewsCard />
           <NewsCard />
           <NewsCard />
         </div>
 
         <div className="text-center mt-12">
-          <Link
-            href="/news"
-            className="bg-gray-800 text-white px-6 py-3 rounded-md text-lg font-medium hover:bg-black transition duration-200"
-          >
-            View All News
-          </Link>
+          {/* ALUTH SHADCN BUTTON EKA */}
+          <Button asChild size="lg" className="text-lg">
+            <Link href="/news">
+              View All News
+            </Link>
+          </Button>
         </div>
       </div>
     </motion.section>

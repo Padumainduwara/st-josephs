@@ -1,10 +1,17 @@
 // components/Testimonials.tsx
 "use client";
 
-import { motion, Variants } from "framer-motion"; // <-- 'Variants' import කලා
+import { motion, Variants } from "framer-motion";
 import React from "react";
 
-// Testimonial data ටික (පස්සෙ Supabase වලින් ගන්න පුළුවන්)
+// Aluthen import kala
+import {
+  Card,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+
+// Testimonial data (Wenasak nehe)
 const testimonials = [
   {
     quote:
@@ -24,7 +31,7 @@ const testimonials = [
     name: "S. Fernando",
     title: "Parent",
   },
-  // Data එක double කරලා carousel එක loop වෙන විදියට හදමු
+  // Data duplicated for seamless loop
   {
     quote:
       "St. Joseph's didn't just give me an education; it gave me a family and the values I live by. I'm forever grateful.",
@@ -45,16 +52,15 @@ const testimonials = [
   },
 ];
 
-// Carousel animation එක
+// Carousel animation (Wenasak nehe)
 const carouselVariants: Variants = {
-  // <-- Type එක :Variants විදියට set කලා
   animate: {
-    x: [0, "-100%"], // 0% ඉඳන් -100% (data double කරපු නිසා)
+    x: [0, "-100%"],
     transition: {
       x: {
         repeat: Infinity,
         repeatType: "loop",
-        duration: 40, // තත්පර 40ක් යනවා එක loop එකකට
+        duration: 40,
         ease: "linear",
       },
     },
@@ -71,9 +77,7 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        {/* Auto-scrolling carousel එක */}
         <div className="relative">
-          {/* Main scrolling track */}
           <motion.div
             className="flex"
             variants={carouselVariants}
@@ -84,19 +88,24 @@ export default function Testimonials() {
                 key={index}
                 className="flex-shrink-0 w-full md:w-1/2 lg:w-1/3 p-4"
               >
-                <div className="bg-gray-50 p-8 rounded-lg shadow-lg h-full">
-                  <p className="text-lg text-gray-700 italic mb-6">
-                    "{item.quote}"
-                  </p>
-                  <p className="text-xl font-semibold text-blue-800">
-                    - {item.name}
-                  </p>
-                  <p className="text-gray-500">{item.title}</p>
-                </div>
+                {/* ALUTH SHADCN CARD EKA */}
+                <Card className="bg-gray-50 shadow-lg h-full flex flex-col">
+                  <CardContent className="flex-grow p-8">
+                    <p className="text-lg text-gray-700 italic mb-6">
+                      "{item.quote}"
+                    </p>
+                  </CardContent>
+                  <CardFooter className="flex flex-col items-start p-8 pt-0">
+                    <p className="text-xl font-semibold text-blue-800">
+                      - {item.name}
+                    </p>
+                    <p className="text-gray-500">{item.title}</p>
+                  </CardFooter>
+                </Card>
               </div>
             ))}
           </motion.div>
-          {/* Gradient එකක් දාමු දකුණු පැත්තෙන් fade වෙන්න */}
+          {/* Fades (Wenasak nehe) */}
           <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-white"></div>
           <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-white"></div>
         </div>

@@ -2,50 +2,19 @@
 "use client";
 
 import Link from "next/link";
-import { motion, Variants } from "framer-motion"; // <-- 'Variants' import කලා
+import { motion, Variants } from "framer-motion";
+import { Button } from "@/components/ui/button"; // <-- Aluthen import kala
 
 export default function HeroSection() {
-  // 1. Text එක වචන වලට කඩලා animate කරන්න "Stagger" effect එකක්
+  // ... (Obage title, subtitle, variants code okkoma mehema thiyenawa)
   const title = "Inspiring Futures at St. Joseph's";
   const titleWords = title.split(" ");
-
-  const subtitle =
-    "Nurturing young minds to achieve their full potential and shine bright.";
+  const subtitle = "Nurturing young minds to achieve their full potential and shine bright.";
   const subtitleWords = subtitle.split(" ");
-
-  // 2. Container (parent) එකට animation variants
-  const containerVariants: Variants = {
-    // <-- Type එක :Variants විදියට set කලා
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1, // එක වචනෙකින් පස්සෙ 0.1s
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  // 3. Child (word) එකට animation variants
-  const wordVariants: Variants = {
-    // <-- Type එක :Variants විදියට set කලා
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 20 }, // පොඩි bounce effect එකක්
-    },
-  };
-
-  const buttonVariants: Variants = {
-    // <-- Type එක :Variants විදියට set කලා
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, delay: 1.5, ease: "easeOut" }, // පොඩි delay එකක් දැම්මා
-    },
-  };
+  const containerVariants: Variants = { /* ... */ };
+  const wordVariants: Variants = { /* ... */ };
+  const buttonVariants: Variants = { /* ... */ };
+  // ... (Mama code eka copy karanne nehe, obage file eke thiyena nisa)
 
   return (
     <div className="relative h-screen min-h-[700px] flex items-center justify-center text-white overflow-hidden">
@@ -61,14 +30,15 @@ export default function HeroSection() {
         Your browser does not support the video tag.
       </video>
 
-      {/* 2. Custom Gradient Overlay (globals.css එකෙන් එන style) */}
+      {/* 2. Custom Gradient Overlay */}
       <div className="absolute inset-0 z-10 hero-overlay"></div>
 
       {/* 3. Content (Animated Text & Buttons) */}
       <div className="relative z-20 text-center px-4 max-w-4xl lg:max-w-5xl mx-auto">
-        {/* 4. Animated Main Title (වචනෙන් වචනෙ) */}
+        
+        {/* 4. Animated Main Title */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight hero-text-shadow" // Custom shadow class
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight hero-text-shadow"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -76,7 +46,7 @@ export default function HeroSection() {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-          }} // වචන ටික එක line එකේ තියන්න
+          }}
         >
           {titleWords.map((word, index) => (
             <motion.span
@@ -85,15 +55,14 @@ export default function HeroSection() {
               className="mr-3 md:mr-4"
             >
               {" "}
-              {/* වචන අතර පොඩි gap එකක් */}
               {word}
             </motion.span>
           ))}
         </motion.h1>
 
-        {/* 5. Animated Subtitle (වචනෙන් වචනෙ) */}
+        {/* 5. Animated Subtitle */}
         <motion.p
-          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-blue-100 max-w-2xl mx-auto hero-text-shadow" // Custom shadow class
+          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-blue-100 max-w-2xl mx-auto hero-text-shadow"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -102,7 +71,7 @@ export default function HeroSection() {
             flexWrap: "wrap",
             justifyContent: "center",
             transitionDelay: "0.8s",
-          }} // පොඩි delay එකක්
+          }}
         >
           {subtitleWords.map((word, index) => (
             <motion.span key={index} variants={wordVariants} className="mr-2">
@@ -111,25 +80,22 @@ export default function HeroSection() {
           ))}
         </motion.p>
 
-        {/* Buttons with animation */}
+        {/* 6. ALUTH BUTTONS (MEKA THAMA WENASA) 
+          Parana Link tags, shadcn <Button> walin replace kala
+        */}
         <motion.div
           className="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
           variants={buttonVariants}
           initial="hidden"
           animate="visible"
         >
-          <Link
-            href="/about"
-            className="bg-blue-600 text-white px-8 py-4 rounded-full text-xl font-semibold hover:bg-blue-700 transition duration-300 transform hover:scale-105 shadow-lg"
-          >
-            Explore Our School
-          </Link>
-          <Link
-            href="/contact"
-            className="bg-white text-blue-900 px-8 py-4 rounded-full text-xl font-semibold hover:bg-gray-200 transition duration-300 transform hover:scale-105 shadow-lg"
-          >
-            Contact Admissions
-          </Link>
+          <Button asChild size="lg" className="text-xl px-8 py-7 shadow-lg transform transition-transform hover:scale-105">
+            <Link href="/about">Explore Our School</Link>
+          </Button>
+          <Button asChild variant="secondary" size="lg" className="text-xl px-8 py-7 shadow-lg transform transition-transform hover:scale-105">
+            {/* Admissions walata link eka damma */}
+            <Link href="/admission">Contact Admissions</Link>
+          </Button>
         </motion.div>
       </div>
 
@@ -145,20 +111,7 @@ export default function HeroSection() {
           delay: 2.5,
         }}
       >
-        <svg
-          className="w-8 h-8 text-white animate-bounce"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 14l-7 7m0 0l-7-7m7 7V3"
-          ></path>
-        </svg>
+        {/* ... (scroll indicator SVG eka) ... */}
       </motion.div>
     </div>
   );

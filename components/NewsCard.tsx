@@ -1,44 +1,64 @@
 // components/NewsCard.tsx
+// PASTE THIS ENTIRE UPDATED CODE
 
-"use client"; // <-- මේක අලුතෙන් add කලේ
 import Link from "next/link";
-import { motion } from "framer-motion"; // <-- මේක තමයි error එකට හේතුව, දැන් add කලා
+import Image from "next/image";
+
+// 1. shadcn/ui Card components import karaganna
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button"; // Button ekath gannawa
 
 export default function NewsCard() {
-  // පස්සෙ Supabase වලින් එන data මෙතනට props විදියට ගන්න
-  // const { title, imageUrl, excerpt, slug } = props;
+  // Me data tika obata props walin ganna puluwan.
+  // Danata, eka component ekak hadamu.
+  const title = "Annual Sports Meet 2025 Highlights";
+  const date = "Oct 28, 2025";
+  const excerpt = "A day of triumph, teamwork, and unforgettable moments...";
+  const imageUrl = "/school-hero-image.png"; // Obage public folder eke image ekak
+  const slug = "/news/annual-sports-meet"; // Adala news post eke path eka
 
   return (
-    <motion.div
-      className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]"
-      // Hover animation එක
-      whileHover={{ y: -5 }} // Hover කරද්දි පොඩ්ඩක් උඩට යන්න
-    >
-      {/* 1. Image */}
-      {/* <Image src={imageUrl} alt={title} width={400} height={250} className="w-full h-48 object-cover" /> */}
-      {/* Placeholder Image */}
-      <div className="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">
-        News Image
+    // 2. Parana div, <Card> eken replace karanna
+    <Card className="w-full max-w-sm overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-xl">
+      
+      {/* 3. Image eka CardHeader eke danna puluwan, nethnam CardContent kalin */}
+      <div className="relative w-full h-48">
+        <Image
+          src={imageUrl}
+          alt={title}
+          layout="fill"
+          objectFit="cover"
+        />
       </div>
 
-      {/* 2. Content */}
-      <div className="p-6 flex-grow flex flex-col">
-        <span className="text-sm text-blue-600 font-medium">Oct 28, 2025</span>
-        <h3 className="text-xl font-semibold text-blue-900 mt-2 mb-3">
-          {/* {title} */}
-          Annual Sports Meet 2025 Highlights
-        </h3>
-        <p className="text-gray-600 flex-grow">
-          {/* {excerpt} */}
-          A day of triumph, teamwork, and unforgettable moments...
-        </p>
-        <Link
-          href={`/news/annual-sports-meet`} // {slug}
-          className="mt-4 text-blue-600 font-semibold hover:text-blue-800 transition duration-150 self-start"
-        >
-          Read More &rarr;
-        </Link>
-      </div>
-    </motion.div>
+      <CardHeader>
+        <p className="text-sm text-blue-600 font-medium">{date}</p>
+        <CardTitle className="text-2xl font-semibold text-blue-900 leading-snug">
+          {title}
+        </CardTitle>
+      </CardHeader>
+      
+      <CardContent className="flex-grow">
+        <CardDescription className="text-base text-gray-700">
+          {excerpt}
+        </CardDescription>
+      </CardContent>
+      
+      <CardFooter>
+        {/* 4. Link eka "Button" ekak widiyata pennamu */}
+        <Button asChild variant="link" className="p-0 text-lg">
+          <Link href={slug}>
+            Read More &rarr;
+          </Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
