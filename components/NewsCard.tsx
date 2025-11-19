@@ -1,10 +1,8 @@
 // components/NewsCard.tsx
-// PASTE THIS ENTIRE UPDATED CODE
 
 import Link from "next/link";
 import Image from "next/image";
 
-// 1. shadcn/ui Card components import karaganna
 import {
   Card,
   CardContent,
@@ -13,22 +11,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button"; // Button ekath gannawa
+import { Button } from "@/components/ui/button";
 
 export default function NewsCard() {
-  // Me data tika obata props walin ganna puluwan.
-  // Danata, eka component ekak hadamu.
   const title = "Annual Sports Meet 2025 Highlights";
   const date = "Oct 28, 2025";
   const excerpt = "A day of triumph, teamwork, and unforgettable moments...";
-  const imageUrl = "/school-hero-image.png"; // Obage public folder eke image ekak
-  const slug = "/news/annual-sports-meet"; // Adala news post eke path eka
+  const imageUrl = "/school-hero-image.png"; 
+  const slug = "/news/annual-sports-meet"; 
 
   return (
-    // 2. Parana div, <Card> eken replace karanna
-    <Card className="w-full max-w-sm overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-xl">
+    <Card className="w-full max-w-sm overflow-hidden flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:border-primary/50">
       
-      {/* 3. Image eka CardHeader eke danna puluwan, nethnam CardContent kalin */}
       <div className="relative w-full h-48">
         <Image
           src={imageUrl}
@@ -39,21 +33,21 @@ export default function NewsCard() {
       </div>
 
       <CardHeader>
-        <p className="text-sm text-blue-600 font-medium">{date}</p>
-        <CardTitle className="text-2xl font-semibold text-blue-900 leading-snug">
+        {/* Date color changed to Maroon/Primary */}
+        <p className="text-sm text-primary font-bold">{date}</p>
+        <CardTitle className="text-2xl font-semibold text-foreground leading-snug">
           {title}
         </CardTitle>
       </CardHeader>
       
       <CardContent className="flex-grow">
-        <CardDescription className="text-base text-gray-700">
+        <CardDescription className="text-base text-gray-600">
           {excerpt}
         </CardDescription>
       </CardContent>
       
       <CardFooter>
-        {/* 4. Link eka "Button" ekak widiyata pennamu */}
-        <Button asChild variant="link" className="p-0 text-lg">
+        <Button asChild variant="link" className="p-0 text-lg text-primary hover:text-red-900">
           <Link href={slug}>
             Read More &rarr;
           </Link>

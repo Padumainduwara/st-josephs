@@ -6,7 +6,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import SchoolImage from "@/public/school-hero-image.png";
 
-// Aluthen import kala
 import { Button } from "@/components/ui/button";
 
 export default function AboutUsPreview() {
@@ -15,7 +14,7 @@ export default function AboutUsPreview() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
-          {/* 1. Image Side (Wenasak Nehe) */}
+          {/* 1. Image Side */}
           <motion.div
             className="rounded-lg overflow-hidden shadow-2xl"
             initial={{ opacity: 0, x: -100 }}
@@ -40,20 +39,24 @@ export default function AboutUsPreview() {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-blue-600 font-semibold uppercase tracking-wider">
+            {/* Changed text-blue-600 to text-primary (Maroon) */}
+            <span className="text-primary font-bold uppercase tracking-wider text-sm md:text-base">
               About Us
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mt-2 mb-4">
+            
+            {/* Changed text-blue-900 to text-primary */}
+            <h2 className="text-3xl md:text-4xl font-extrabold text-primary mt-3 mb-6 leading-tight">
               A Legacy of Excellence
             </h2>
-            <p className="text-gray-700 text-lg mb-6">
+            
+            <p className="text-gray-700 text-lg mb-8 leading-relaxed">
               Founded in 1930, St. Joseph's Girls' School has been a beacon of
               knowledge and faith. We are dedicated to empowering young women, 
               fostering academic excellence, and building strong character for generations.
             </p>
             
-            {/* 3. ALUTH SHADCN BUTTON EKA */}
-            <Button asChild size="lg" className="text-lg transform transition-transform hover:scale-105">
+            {/* Button color is already primary by default (Maroon) */}
+            <Button asChild size="lg" className="text-lg px-8 py-6 transform transition-transform hover:scale-105 shadow-lg">
               <Link href="/about">
                 Discover Our Story
               </Link>

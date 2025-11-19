@@ -28,19 +28,20 @@ const cardVariants: Variants = {
 export default function CoreValues() {
   const values = [
     {
-      icon: <AcademicCapIcon className="h-10 w-10 text-blue-600" />,
+      // Icon color changed to text-primary (Maroon)
+      icon: <AcademicCapIcon className="h-10 w-10 text-primary" />,
       title: "Academic Excellence",
       description:
         "Dedicated to providing a superior educational foundation for every student.",
     },
     {
-      icon: <SparklesIcon className="h-10 w-10 text-blue-600" />,
+      icon: <SparklesIcon className="h-10 w-10 text-primary" />,
       title: "Strong Values",
       description:
         "Nurturing discipline, respect, and integrity in a faith-based environment.",
     },
     {
-      icon: <TrophyIcon className="h-10 w-10 text-blue-600" />,
+      icon: <TrophyIcon className="h-10 w-10 text-primary" />,
       title: "Holistic Development",
       description:
         "Balancing academics with sports, arts, and extracurricular activities.",
@@ -48,7 +49,7 @@ export default function CoreValues() {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50"> {/* bg-blue-50 -> bg-gray-50 */}
+    <section className="py-16 md:py-24 bg-white"> {/* Background white thiyanna */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12"
@@ -57,17 +58,17 @@ export default function CoreValues() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900">
+          {/* Heading color changed to Primary (Maroon) */}
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">
             Why St. Joseph's?
           </h2>
-          <p className="text-lg text-gray-700 mt-2">
+          <p className="text-lg text-gray-600 mt-2">
             A tradition of excellence in education and character.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            // ALUTH CARD COMPONENT EKA
             <motion.div
               key={value.title}
               variants={cardVariants}
@@ -76,12 +77,17 @@ export default function CoreValues() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Card className="h-full text-center flex flex-col items-center transition-all duration-300 hover:shadow-xl">
+              {/* Card hover effect and border updated */}
+              <Card className="h-full text-center flex flex-col items-center transition-all duration-300 hover:shadow-xl hover:border-primary/30 group">
                 <CardHeader className="items-center">
-                  <div className="bg-blue-100 p-4 rounded-full mb-4">
-                    {value.icon}
+                  {/* Icon background changed to red-50 (Light Maroon) */}
+                  <div className="bg-red-50 p-5 rounded-full mb-4 group-hover:bg-primary transition-colors duration-300">
+                    {/* Icon color logic: Default Primary, Hover White */}
+                    <div className="text-primary group-hover:text-white transition-colors duration-300">
+                      {value.icon}
+                    </div>
                   </div>
-                  <CardTitle className="text-2xl text-blue-900">
+                  <CardTitle className="text-2xl text-primary font-bold">
                     {value.title}
                   </CardTitle>
                 </CardHeader>

@@ -8,6 +8,7 @@ import CoreValues from "@/components/CoreValues";     // <-- අලුතෙන�
 import Testimonials from "@/components/Testimonials"; // <-- අලුතෙන් Import කලා
 import NewsAndEvents from "@/components/NewsAndEvents";
 import Footer from "@/components/Footer";
+import PrincipalMessage from "@/components/PrincipalMessage";
 
 export default function Home() {
   return (
@@ -21,6 +22,8 @@ export default function Home() {
 
       {/* 3. About Us Preview */}
       <AboutUsPreview />
+
+      <PrincipalMessage />
 
       {/* 4. "Wow" Stats Section */}
       <StatsSection />

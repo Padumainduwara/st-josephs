@@ -1,11 +1,9 @@
 // app/events/page.tsx
-// PASTE THIS ENTIRE UPDATED CODE
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { CalendarDaysIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { MapPinIcon } from "@heroicons/react/24/outline";
 
-// 1. Aluthen shadcn/ui Card components import karaganna
 import {
   Card,
   CardContent,
@@ -15,7 +13,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-// 2. EventCard component eka aluth Card eken hadamu
 function EventCard({ date, title, description, location }: {
   date: { day: string, month: string },
   title: string,
@@ -23,18 +20,16 @@ function EventCard({ date, title, description, location }: {
   location: string
 }) {
   return (
-    // Parana `div` eka `Card` eken replace kala
-    <Card className="overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-2xl">
-      {/* Date Section (Wenasak nehe, meka lassanai) */}
-      <div className="flex-shrink-0 w-full md:w-32 bg-blue-600 text-white flex md:flex-col items-center justify-center p-6">
+    <Card className="overflow-hidden flex flex-col md:flex-row transition-all duration-300 hover:shadow-2xl border-none shadow-md">
+      {/* Date Section: Changed bg-blue-600 to bg-primary */}
+      <div className="flex-shrink-0 w-full md:w-32 bg-primary text-white flex md:flex-col items-center justify-center p-6">
         <span className="text-5xl font-bold">{date.day}</span>
-        <span className="text-2xl font-medium md:mt-1 md:ml-0 ml-3">{date.month}</span>
+        <span className="text-2xl font-medium md:mt-1 md:ml-0 ml-3 text-yellow-400">{date.month}</span>
       </div>
       
-      {/* Content Section (Card components walata maaru kala) */}
-      <div className="flex flex-col justify-center w-full">
+      <div className="flex flex-col justify-center w-full p-2">
         <CardHeader>
-          <CardTitle className="text-2xl font-semibold text-blue-900">
+          <CardTitle className="text-2xl font-semibold text-primary">
             {title}
           </CardTitle>
         </CardHeader>
@@ -45,7 +40,7 @@ function EventCard({ date, title, description, location }: {
         </CardContent>
         <CardFooter>
           <div className="flex items-center text-gray-500">
-            <MapPinIcon className="h-5 w-5 mr-2" />
+            <MapPinIcon className="h-5 w-5 mr-2 text-primary" />
             <span>{location}</span>
           </div>
         </CardFooter>
@@ -56,7 +51,6 @@ function EventCard({ date, title, description, location }: {
 
 
 export default function EventsPage() {
-  // Placeholder data (Wenasak nehe)
   const events = [
     {
       date: { day: "15", month: "DEC" },
@@ -88,15 +82,13 @@ export default function EventsPage() {
     <main className="bg-gray-50 min-h-screen">
       <Navbar />
 
-      {/* Page Content */}
       <div className="pt-24 md:pt-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
           
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-12 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-12 text-center">
             Upcoming Events
           </h1>
 
-          {/* List of Event Cards */}
           <div className="space-y-8 max-w-4xl mx-auto">
             {events.map((event) => (
               <EventCard 
