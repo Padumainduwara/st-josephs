@@ -126,11 +126,16 @@ export default function AdmissionPage() {
               Please check back later for updates.
             </p>
             
-            <Button asChild size="lg" disabled className="text-lg bg-white text-primary hover:bg-gray-100 opacity-90 cursor-not-allowed shadow-md">
-              <Link href="#">
-                Download Application Form (Not Available)
-              </Link>
-            </Button>
+            <Button 
+  asChild 
+  size="lg" 
+  disabled 
+  className="text-lg bg-white text-primary hover:bg-gray-100 opacity-90 cursor-not-allowed shadow-md whitespace-normal h-auto py-4 text-center leading-tight"
+>
+  <Link href="#">
+    Download Application Form
+  </Link>
+</Button>
           </div>
 
         </div>
