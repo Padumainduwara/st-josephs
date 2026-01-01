@@ -1,90 +1,261 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { 
+  StarIcon, 
+  TrophyIcon, 
+  UserIcon,
+  ShieldCheckIcon,
+  SparklesIcon
+} from "@heroicons/react/24/solid";
+
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function PrefectsPage() {
   return (
-    <main className="bg-gray-50 min-h-screen">
+    <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
       <Navbar />
 
-      <div className="pt-20">
-        <div className="bg-primary text-white py-20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 bg-[url('/images/IMG_6160.JPG')] bg-cover bg-center" />
-          <div className="relative z-10 container mx-auto px-4">
-            <h1 className="text-5xl font-extrabold mb-4">Prefects' Guild</h1>
-            <p className="text-xl text-yellow-300 font-serif italic">"Leadership through Service"</p>
-          </div>
-        </div>
+      {/* --- HERO SECTION --- */}
+      <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden flex items-center justify-center">
+        
+        {/* 1. Background Image */}
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          {/* Using the group photo or general school photo for Hero background */}
+          <Image
+            src="/images/IMG_6160.JPG" 
+            alt="Prefects Guild"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
 
-        <div className="container mx-auto px-4 py-16">
+        {/* 2. OVERLAY: Deep Maroon Gradient */}
+        <div className="absolute inset-0 bg-[#500000]/90 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+        
+        {/* 3. HERO CONTENT */}
+        <div className="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
           
-          {/* Head Prefect Section */}
-          <div className="flex flex-col items-center mb-20">
-            <h2 className="text-3xl font-bold text-primary mb-10 text-center">Top Board 2024/2025</h2>
-            
-            <div className="grid md:grid-cols-3 gap-10 items-end">
-              
-              {/* Deputy 1 */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-center order-2 md:order-1"
-              >
-                <div className="w-48 h-64 bg-gray-300 rounded-lg mx-auto mb-4 overflow-hidden relative shadow-lg">
-                  <Image src="/images/IMG_6110.JPG" alt="Deputy" fill className="object-cover" />
-                </div>
-                <h3 className="text-xl font-bold">Name Here</h3>
-                <p className="text-gray-500">Deputy Head Prefect</p>
-              </motion.div>
-
-              {/* Head Prefect - Center & Larger */}
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                className="text-center order-1 md:order-2"
-              >
-                <div className="w-64 h-80 bg-gray-300 rounded-xl mx-auto mb-4 overflow-hidden relative shadow-2xl border-4 border-yellow-500">
-                  <Image src="/images/IMG_6110.JPG" alt="Head Prefect" fill className="object-cover" />
-                </div>
-                <h3 className="text-2xl font-bold text-primary">Head Prefect Name</h3>
-                <p className="text-primary font-bold uppercase tracking-widest">Head Prefect</p>
-              </motion.div>
-
-              {/* Deputy 2 */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-center order-3"
-              >
-                <div className="w-48 h-64 bg-gray-300 rounded-lg mx-auto mb-4 overflow-hidden relative shadow-lg">
-                  <Image src="/images/IMG_6110.JPG" alt="Deputy" fill className="object-cover" />
-                </div>
-                <h3 className="text-xl font-bold">Name Here</h3>
-                <p className="text-gray-500">Deputy Head Prefect</p>
-              </motion.div>
-
-            </div>
-          </div>
-
-          {/* Oath Section */}
-          <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg border-l-8 border-primary text-center mb-16">
-            <h3 className="text-2xl font-bold mb-4">The Prefects' Oath</h3>
-            <p className="text-lg text-gray-700 italic leading-relaxed">
-              "I pledge to serve my school with loyalty, honor, and discipline. I will strive to be a role model to my fellow students and uphold the values of St. Joseph's Girls' School at all times."
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-2xl">
+              Prefects' Guild
+            </h1>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <p className="text-lg md:text-2xl text-yellow-300 font-serif italic max-w-3xl mx-auto drop-shadow-md leading-relaxed">
+              "Leadership through Service, Loyalty, and Discipline."
             </p>
-          </div>
-
-          {/* Group Photo Placeholder */}
-          <div className="w-full h-[400px] relative rounded-2xl overflow-hidden shadow-xl bg-gray-200 flex items-center justify-center">
-             <Image src="/images/IMG_6159.JPG" alt="Group" fill className="object-cover opacity-80" />
-             <h2 className="relative z-10 text-white text-4xl font-bold bg-black/50 px-6 py-2 rounded">Guild of 2024</h2>
-          </div>
-
+          </motion.div>
+          
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mt-8 w-24 md:w-32 h-1.5 bg-yellow-400 rounded-full shadow-lg" 
+          />
         </div>
       </div>
+
+      {/* --- MAIN CONTENT --- */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
+
+        {/* --- TOP BOARD SECTION --- */}
+        <div className="mb-24">
+            
+            {/* UPDATED HEADER: Responsive Layout (Matches Alumni/SDS Style) */}
+            <div className="mb-12 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 uppercase tracking-wide flex flex-col md:flex-row items-center justify-center gap-y-3 md:gap-x-4">
+                    {/* Icon - Top on mobile, Left on desktop */}
+                    <StarIcon className="h-10 w-10 text-yellow-500 drop-shadow-sm" /> 
+                    
+                    {/* Text Container */}
+                    <div className="flex flex-col md:flex-row items-center gap-y-1 md:gap-x-3">
+                        <span>Top Board</span>
+                        <span className="text-black font-extrabold text-2xl md:text-4xl">
+                            2025 / 2026
+                        </span>
+                    </div>
+                </h2>
+            </div>
+
+            {/* HEAD PREFECT - Center Stage */}
+            <div className="flex justify-center mb-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="w-full max-w-sm"
+                >
+                    <Card className="text-center bg-white border-t-8 border-t-[#800000] shadow-2xl hover:shadow-3xl transition-all p-8 relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <StarIcon className="h-24 w-24 text-[#800000]" />
+                        </div>
+                        <CardContent className="pt-4 relative z-10">
+                            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-[#800000] to-red-900 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-lg text-white">
+                                {/* Initials */}
+                                <span className="text-3xl font-bold">V.G</span>
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-2">V. G. D. Yapa</h3>
+                            <Badge className="bg-[#800000] hover:bg-[#600000] text-base px-6 py-1.5 rounded-full shadow-md">
+                                Head Prefect
+                            </Badge>
+                        </CardContent>
+                    </Card>
+                </motion.div>
+            </div>
+
+            {/* DEPUTY HEAD PREFECTS */}
+            <h3 className="text-xl md:text-2xl font-bold text-center text-gray-700 mb-8 uppercase tracking-wide">
+               Deputy Head Prefects
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                    { name: "P. M. P. Gomes", role: "Deputy Head Prefect" },
+                    { name: "W. K. O. A. Perera", role: "Deputy Head Prefect" },
+                    { name: "S. K. Weerasinghe", role: "Deputy Head Prefect" },
+                ].map((member, index) => (
+                    <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                    >
+                        <Card className="text-center bg-white border-t-4 border-t-yellow-500 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2 duration-300">
+                            <CardContent className="pt-4">
+                                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
+                                    <span className="text-2xl font-bold">{member.name.split(" ").pop()?.charAt(0)}</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
+                                <p className="text-yellow-700 font-semibold text-sm">{member.role}</p>
+                            </CardContent>
+                        </Card>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+
+        {/* --- GAMES CAPTAINS SECTION --- */}
+        <div className="mb-24">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 uppercase tracking-wide flex items-center justify-center gap-3">
+               <TrophyIcon className="h-8 w-8 text-blue-600" /> 
+               Games Captains
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <Card className="text-center bg-white border-t-4 border-t-blue-600 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                        <CardContent className="pt-4">
+                            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
+                                <TrophyIcon className="h-10 w-10" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. S. M. Perera</h3>
+                            <Badge className="bg-blue-600 hover:bg-blue-700">Games Captain</Badge>
+                        </CardContent>
+                    </Card>
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <Card className="text-center bg-white border-t-4 border-t-blue-400 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                        <CardContent className="pt-4">
+                            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
+                                <TrophyIcon className="h-10 w-10" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. D. M. S. Jesni</h3>
+                            <Badge className="bg-blue-500 hover:bg-blue-600">Vice Games Captain</Badge>
+                        </CardContent>
+                    </Card>
+                </motion.div>
+            </div>
+        </div>
+
+        {/* --- OATH SECTION --- */}
+        <div className="mb-24">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+            >
+                <Card className="bg-white border-none shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#800000] via-yellow-400 to-[#800000]" />
+                    <CardContent className="p-8 md:p-12 text-center">
+                        <ShieldCheckIcon className="h-16 w-16 text-[#800000] mx-auto mb-6 opacity-80" />
+                        <h2 className="text-3xl font-serif font-bold text-gray-900 mb-8">Prefects' Oath</h2>
+                        
+                        <div className="space-y-6 text-lg md:text-xl text-gray-700 leading-relaxed font-serif italic max-w-4xl mx-auto">
+                            <p>
+                                "As a Prefect of St. Joseph's Girls School Nugegoda in Dehiwala division Piliyandala Zone Western Province, 
+                                I promise on my honour to work for a strong and morally disciplined women leadership to face the new challenges of school, 
+                                being loyal and trustworthy to the principal and to the teachers and work towards the betterment of the school."
+                            </p>
+                            <p>
+                                "I devote to be an exemplary leader and lead others towards good leadership. 
+                                And I promise to respect and protect the rules and regulations of the school."
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+            </motion.div>
+        </div>
+
+        {/* --- GUILD PHOTO --- */}
+        <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 uppercase tracking-wide">
+                Prefects' Guild
+            </h2>
+            <p className="text-black font-bold text-xl mb-8">2025 - 2026</p>
+
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative w-full h-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-100"
+            >
+                <Image 
+                    src="/images/prefects/guild.png" 
+                    alt="Prefects Guild Group Photo" 
+                    fill
+                    className="object-contain hover:scale-105 transition-transform duration-700"
+                />
+                
+                 <div className="absolute bottom-0 left-0 w-full p-4 text-white text-center pointer-events-none flex items-end justify-center bg-gradient-to-t from-black/50 to-transparent">
+                    <p className="text-lg font-medium opacity-90 drop-shadow-md">Unity is Strength</p>
+                </div>
+            </motion.div>
+        </div>
+
+      </div>
+
       <Footer />
     </main>
   );
