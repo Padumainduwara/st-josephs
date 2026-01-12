@@ -7,9 +7,7 @@ import Image from "next/image";
 import { 
   StarIcon, 
   TrophyIcon, 
-  UserIcon,
   ShieldCheckIcon,
-  SparklesIcon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -19,6 +17,25 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 export default function PrefectsPage() {
+  // --- DEPUTY HEAD PREFECTS DATA ---
+  const deputies = [
+    { 
+      name: "P. M. P. Gomes", 
+      role: "Deputy Head Prefect", 
+      image: "/images/prefects/gomes.jpg" // Make sure file name matches
+    },
+    { 
+      name: "W. K. O. A. Perera", 
+      role: "Deputy Head Prefect", 
+      image: "/images/prefects/perera-wkoa.jpg" 
+    },
+    { 
+      name: "S. K. Weerasinghe", 
+      role: "Deputy Head Prefect", 
+      image: "/images/prefects/weerasinghe.jpg" 
+    },
+  ];
+
   return (
     <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
       <Navbar />
@@ -33,7 +50,6 @@ export default function PrefectsPage() {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="absolute inset-0 w-full h-full"
         >
-          {/* Using the group photo or general school photo for Hero background */}
           <Image
             src="/images/IMG_6160.JPG" 
             alt="Prefects Guild"
@@ -43,7 +59,7 @@ export default function PrefectsPage() {
           />
         </motion.div>
 
-        {/* 2. OVERLAY: Deep Maroon Gradient */}
+        {/* 2. OVERLAY */}
         <div className="absolute inset-0 bg-[#500000]/90 z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
         
@@ -85,13 +101,10 @@ export default function PrefectsPage() {
         {/* --- TOP BOARD SECTION --- */}
         <div className="mb-24">
             
-            {/* UPDATED HEADER: Responsive Layout (Matches Alumni/SDS Style) */}
+            {/* Header */}
             <div className="mb-12 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 uppercase tracking-wide flex flex-col md:flex-row items-center justify-center gap-y-3 md:gap-x-4">
-                    {/* Icon - Top on mobile, Left on desktop */}
                     <StarIcon className="h-10 w-10 text-yellow-500 drop-shadow-sm" /> 
-                    
-                    {/* Text Container */}
                     <div className="flex flex-col md:flex-row items-center gap-y-1 md:gap-x-3">
                         <span>Top Board</span>
                         <span className="text-black font-extrabold text-2xl md:text-4xl">
@@ -102,7 +115,7 @@ export default function PrefectsPage() {
             </div>
 
             {/* HEAD PREFECT - Center Stage */}
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -114,9 +127,14 @@ export default function PrefectsPage() {
                             <StarIcon className="h-24 w-24 text-[#800000]" />
                         </div>
                         <CardContent className="pt-4 relative z-10">
-                            <div className="w-32 h-32 mx-auto bg-gradient-to-br from-[#800000] to-red-900 rounded-full flex items-center justify-center mb-6 border-4 border-white shadow-lg text-white">
-                                {/* Initials */}
-                                <span className="text-3xl font-bold">V.G</span>
+                            {/* Head Prefect Image */}
+                            <div className="w-40 h-40 mx-auto rounded-full mb-6 border-4 border-[#800000] shadow-xl overflow-hidden relative">
+                                <Image 
+                                    src="/images/prefects/yapa.jpg" // RENAME FILE TO THIS
+                                    alt="V. G. D. Yapa"
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 mb-2">V. G. D. Yapa</h3>
                             <Badge className="bg-[#800000] hover:bg-[#600000] text-base px-6 py-1.5 rounded-full shadow-md">
@@ -128,15 +146,11 @@ export default function PrefectsPage() {
             </div>
 
             {/* DEPUTY HEAD PREFECTS */}
-            <h3 className="text-xl md:text-2xl font-bold text-center text-gray-700 mb-8 uppercase tracking-wide">
+            <h3 className="text-xl md:text-2xl font-bold text-center text-gray-700 mb-10 uppercase tracking-wide">
                Deputy Head Prefects
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                    { name: "P. M. P. Gomes", role: "Deputy Head Prefect" },
-                    { name: "W. K. O. A. Perera", role: "Deputy Head Prefect" },
-                    { name: "S. K. Weerasinghe", role: "Deputy Head Prefect" },
-                ].map((member, index) => (
+                {deputies.map((member, index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
@@ -144,10 +158,16 @@ export default function PrefectsPage() {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Card className="text-center bg-white border-t-4 border-t-yellow-500 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2 duration-300">
+                        <Card className="text-center h-full bg-white border-t-4 border-t-yellow-500 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2 duration-300">
                             <CardContent className="pt-4">
-                                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
-                                    <span className="text-2xl font-bold">{member.name.split(" ").pop()?.charAt(0)}</span>
+                                {/* Deputy Image */}
+                                <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-yellow-400 shadow-md overflow-hidden relative">
+                                    <Image 
+                                        src={member.image}
+                                        alt={member.name}
+                                        fill
+                                        className="object-cover"
+                                    />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
                                 <p className="text-yellow-700 font-semibold text-sm">{member.role}</p>
@@ -165,34 +185,47 @@ export default function PrefectsPage() {
                Games Captains
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                
+                {/* Games Captain */}
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <Card className="text-center bg-white border-t-4 border-t-blue-600 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                    <Card className="text-center h-full bg-white border-t-4 border-t-blue-600 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
                         <CardContent className="pt-4">
-                            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
-                                <TrophyIcon className="h-10 w-10" />
+                            <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-blue-600 shadow-md overflow-hidden relative">
+                                <Image 
+                                    src="/images/prefects/perera-wasm.jpg" // RENAME FILE TO THIS
+                                    alt="W. A. S. M. Perera"
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. S. M. Perera</h3>
-                            <Badge className="bg-blue-600 hover:bg-blue-700">Games Captain</Badge>
+                            <Badge className="bg-blue-600 hover:bg-blue-700 text-sm py-1 px-4">Games Captain</Badge>
                         </CardContent>
                     </Card>
                 </motion.div>
 
+                {/* Vice Games Captain */}
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <Card className="text-center bg-white border-t-4 border-t-blue-400 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                    <Card className="text-center h-full bg-white border-t-4 border-t-blue-400 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
                         <CardContent className="pt-4">
-                            <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow text-white">
-                                <TrophyIcon className="h-10 w-10" />
+                             <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-blue-400 shadow-md overflow-hidden relative">
+                                <Image 
+                                    src="/images/prefects/jesni.jpg" // RENAME FILE TO THIS
+                                    alt="W. A. D. M. S. Jesni"
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. D. M. S. Jesni</h3>
-                            <Badge className="bg-blue-500 hover:bg-blue-600">Vice Games Captain</Badge>
+                            <Badge className="bg-blue-500 hover:bg-blue-600 text-sm py-1 px-4">Vice Games Captain</Badge>
                         </CardContent>
                     </Card>
                 </motion.div>
