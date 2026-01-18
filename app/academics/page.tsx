@@ -259,7 +259,7 @@ export default function AcademicsPage() {
               </CardHeader>
               <CardContent className="p-6">
                  <div className="flex flex-wrap justify-center gap-2">
-                    {["Biology", "Physics", "Chemistry", "ICT"].map((sub, i) => (
+                    {["Biology", "Physics", "Chemistry", "Agriculture"].map((sub, i) => (
                         <Badge key={i} variant="secondary" className="bg-green-50 text-green-800 hover:bg-green-100 text-sm py-1.5 px-4 border border-green-100">
                             {sub}
                         </Badge>

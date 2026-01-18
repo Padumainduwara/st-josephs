@@ -19,7 +19,7 @@ export default function SchoolProfile() {
   ];
 
   return (
-    <section className="py-12 md:py-20 bg-gray-50">
+    <section className="py-12 md:py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4 md:px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-brand-primary">School Profile</h2>
         

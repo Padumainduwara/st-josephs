@@ -28,20 +28,22 @@ const cardVariants: Variants = {
 export default function CoreValues() {
   const values = [
     {
-      // Icon color changed to text-primary (Maroon)
-      icon: <AcademicCapIcon className="h-10 w-10 text-primary" />,
+      // REMOVED "text-primary" from className here
+      icon: <AcademicCapIcon className="h-10 w-10" />, 
       title: "Academic Excellence",
       description:
         "Dedicated to providing a superior educational foundation for every student.",
     },
     {
-      icon: <SparklesIcon className="h-10 w-10 text-primary" />,
+      // REMOVED "text-primary" from className here
+      icon: <SparklesIcon className="h-10 w-10" />,
       title: "Strong Values",
       description:
         "Nurturing discipline, respect, and integrity in a faith-based environment.",
     },
     {
-      icon: <TrophyIcon className="h-10 w-10 text-primary" />,
+      // REMOVED "text-primary" from className here
+      icon: <TrophyIcon className="h-10 w-10" />,
       title: "Holistic Development",
       description:
         "Balancing academics with sports, arts, and extracurricular activities.",

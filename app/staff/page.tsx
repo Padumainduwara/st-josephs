@@ -9,7 +9,8 @@ import {
   AcademicCapIcon, 
   BriefcaseIcon, 
   UserGroupIcon,
-  StarIcon
+  StarIcon,
+  SparklesIcon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -20,59 +21,119 @@ import { Badge } from "@/components/ui/badge";
 
 // --- DATA LISTS ---
 
-const academicStaff = [
-  // 1-20
-  { name: "Mrs. W. Shirani Kadithuwakku", subject: "Academic Staff" },
-  { name: "Mrs. H. D. Kumudumall Hapuarachchi", subject: "Academic Staff" },
-  { name: "Mrs. P. Amara Shinyani Guruge", subject: "Academic Staff" },
-  { name: "Mrs. D. C. P. Narangoda", subject: "Academic Staff" },
-  { name: "Mrs. M. P. Wasanthi Galagama", subject: "Academic Staff" },
-  { name: "Mrs. H. Madhawi Ekanayake", subject: "Academic Staff" },
-  { name: "Mrs. D. Morin Calsta Ramanayake", subject: "Academic Staff" },
-  { name: "Mrs. K. K. C. K. Menaka Kulathilaka", subject: "Academic Staff" },
-  { name: "Mrs. S. H. Nelani Seppalika", subject: "Academic Staff" },
-  { name: "Mrs. Chanika Shivanthi Liyanage", subject: "Academic Staff" },
-  { name: "Mrs. W. A. Nishanthi", subject: "Academic Staff" },
-  { name: "Mrs. J. Anuruddika Karunaratne", subject: "Academic Staff" },
-  { name: "Mrs. K. A. D. Krishani Dilrukshi", subject: "Academic Staff" },
-  { name: "Mrs. W. A. Chamila Nayanamali Weerakoon", subject: "Academic Staff" },
-  { name: "Ms. Anne Nishanthi Rathnasinghe", subject: "Academic Staff" },
-  { name: "Mrs. T. M. Dipika Siriwardane", subject: "Academic Staff" },
-  { name: "Mrs. Kalani Chathurnika Morawaka", subject: "Academic Staff" },
-  { name: "Mrs. Lasanthi Priyawadani Gunaratne", subject: "Academic Staff" },
-  { name: "Mrs. P. Stella Priyangani", subject: "Academic Staff" },
-  { name: "Mrs. C. P. A. P. Adhikari", subject: "Academic Staff" },
-  
-  // 31-36
-  { name: "Mrs. M. Thushari Damayanthi", subject: "Academic Staff" },
-  { name: "Mrs. W. Thilini Maheshya Fernando", subject: "Academic Staff" },
-  { name: "Mrs. H. L. G. Manoja Nilmani Kumari", subject: "Academic Staff" },
-  { name: "Mrs. N. L. Darshika Nilani Abewardane", subject: "Academic Staff" },
-  { name: "Mrs. W. T. C. Darshani", subject: "Academic Staff" },
-  { name: "Mrs. U. G. A. S. K. K. Gamage", subject: "Academic Staff" },
+const deputyPrincipals = [
+  { name: "Mrs. Subhashini Perera", role: "Deputy Principal" },
+  { name: "Mrs. Anuradha Rathnayaka", role: "Deputy Principal" },
+  { name: "Mrs. Waruni Wickramasinghe", role: "Deputy Principal" },
+  { name: "Mrs. Rasanjali Jayathilaka", role: "Deputy Principal" },
+];
 
-  // 43-61
-  { name: "Mrs. K. L. Imalka", subject: "English" },
-  { name: "Mr. Y. L. U. Premachandra", subject: "Mathematics" },
-  { name: "Mrs. L. Subhashini Rodngo", subject: "Dancing / Drama" },
-  { name: "Mrs. B. A. Nadeeshani Githanjali", subject: "Mathematics" },
-  { name: "Mrs. A. M. Ruwani Prasadi Amarakoon", subject: "Sinhala Lit / Media" },
-  { name: "Mrs. Ranika Peramunage", subject: "Geography / History" },
-  { name: "Mrs. G. A. Waruni Chinthaki", subject: "Primary Ed / Geography" },
-  { name: "Mrs. H. A. D. Lakshana Lakmini", subject: "Western Music" },
-  { name: "Mrs. Nethini Maduwanthi Karunasekara", subject: "Geo / Buddhism / Hist" },
-  { name: "Mrs. M. R. Sandamali", subject: "Primary Education" },
-  { name: "Mrs. K. A. Mayuri Mihirani", subject: "Health" },
-  { name: "Mrs. P. G. K. Tosha Perera", subject: "Primary Education" },
-  { name: "Mrs. N. Nishani Mendis", subject: "Academic Staff" },
-  { name: "Mrs. N. A. Nilukshi Sammani Bandara", subject: "Academic Staff" },
-  { name: "Mrs. Lilani Sadaruwani Abenayake", subject: "Academic Staff" },
-  { name: "Mrs. Jayamali Jayathilake", subject: "Academic Staff" },
-  { name: "Mrs. H. M. U Sandani Nirodha Hettiarachchi", subject: "Academic Staff" },
-  { name: "Mrs. H. H. R. Pathirana", subject: "Academic Staff" },
-  { name: "Mrs. K. M. C. A. Konara", subject: "Academic Staff" },
-  { name: "Mrs. V. G. Wijewikrama", subject: "English" },
-  { name: "Mrs. M. G. C. P. Kumari", subject: "Christianity" },
+const assistantPrincipals = [
+  { name: "Ms. Mari Fernando", role: "Assistant Principal" },
+  { name: "Mrs. Laseema Rajapaksha", role: "Assistant Principal" },
+  { name: "Mrs. Thivantha Jayawardane", role: "Assistant Principal" },
+  { name: "Ms. Anne Nishanthi Rathnasekara", role: "Assistant Principal" },
+];
+
+const academicStaff = [
+  { name: "Mrs. W.A.D. Fernando", subject: "Academic Staff" },
+  { name: "Mrs. K.K.C.K.M. Kulathilaka", subject: "Academic Staff" },
+  { name: "Mrs. S.H.N. Sepalika", subject: "Academic Staff" },
+  { name: "Mrs. C.S. Liyanage", subject: "Academic Staff" },
+  { name: "Mrs. W.A. Nishanthi", subject: "Academic Staff" },
+  { name: "Mrs. W.A.C.N. Weerakoon", subject: "Academic Staff" },
+  { name: "Mrs. S.R. Madawala", subject: "Academic Staff" },
+  { name: "Mrs. G.U. Vithanathanthri", subject: "Academic Staff" },
+  { name: "Mrs. O.V.D.S.S. Weerasena", subject: "Academic Staff" },
+  { name: "Mrs. D.J. Liyanage", subject: "Academic Staff" },
+  { name: "Mrs. T.M.D. Siriwardhana", subject: "Academic Staff" },
+  { name: "Miss K.C. Morawaka", subject: "Academic Staff" },
+  { name: "Miss M.D.L.P. Gunarathne (Attached)", subject: "Academic Staff" },
+  { name: "Mrs. P.S. Priyangani", subject: "Academic Staff" },
+  { name: "Mrs. K.A.D.C. Ruwanthi", subject: "Academic Staff" },
+  { name: "Mrs. H.W. Bambarandage", subject: "Academic Staff" },
+  { name: "Mrs. K.G.M.C. Gunadasa", subject: "Academic Staff" },
+  { name: "Mrs. E.B.D.A. Priyadarshani", subject: "Academic Staff" },
+  { name: "Mrs. E.S. Jayasundara", subject: "Academic Staff" },
+  { name: "Mrs. D.N.S. Wijesinghe", subject: "Academic Staff" },
+  { name: "Mrs. I.M. Madusha Lakmali", subject: "Academic Staff" },
+  { name: "Mrs. P.A. Randika Harshani Dharmasiri", subject: "Academic Staff" },
+  { name: "Mrs. I.M. Nadeesha Charunika", subject: "Academic Staff" },
+  { name: "Mrs. W.M.S.C. Wijekoon", subject: "Academic Staff" },
+  { name: "Mrs. M. Thushari Damayanthi", subject: "Academic Staff" },
+  { name: "Mrs. W.T.M. Fernando", subject: "Academic Staff" },
+  { name: "Mrs. H.L.G.M.N. Kumari", subject: "Academic Staff" },
+  { name: "Mrs. N.I.D. Nilani Abeywardena", subject: "Academic Staff" },
+  { name: "Mrs. H.I. Wickramasinghe", subject: "Academic Staff" },
+  { name: "Mrs. N. Manoshi Liyanage", subject: "Academic Staff" },
+  { name: "Mrs. S.K. Hettiarachchi", subject: "Academic Staff" },
+  { name: "Mrs. M.K.H.K. Munasinghe", subject: "Academic Staff" },
+  { name: "Mrs. M.N. Perera", subject: "Academic Staff" },
+  { name: "Mrs. W.T.C. Darshani", subject: "Academic Staff" },
+  { name: "Mrs. U.D. Harshika Samanthi", subject: "Academic Staff" },
+  { name: "Mr. N.W.A. Thissa Wasanthakumara", subject: "Academic Staff" },
+  { name: "Mrs. M.V.P. Rajini Arambawela", subject: "Academic Staff" },
+  { name: "Mrs. E.G.I.S. Premarathne", subject: "Academic Staff" },
+  { name: "Mrs. V.G. Wijewickrama", subject: "Academic Staff" },
+  { name: "Mrs. M.G.C.P. Kumari", subject: "Academic Staff" },
+  { name: "Mrs. B.K.L. Imalka", subject: "Academic Staff" },
+  { name: "Mr. Y.I.U. Premachandra", subject: "Academic Staff" },
+  { name: "Mrs. V.G.D.N. Wickramasinghe", subject: "Academic Staff" },
+  { name: "Mrs. Y.P.D.A. Silva (Attached)", subject: "Academic Staff" },
+  { name: "Mrs. K.M.N.T.K. Bandara", subject: "Academic Staff" },
+  { name: "Mrs. P.G.J.A. Keerthirathne", subject: "Academic Staff" },
+  { name: "Mrs. W.D. Yamuna Priyanthi", subject: "Academic Staff" },
+  { name: "Mrs. L.C.S. Rodrigo", subject: "Academic Staff" },
+  { name: "Mrs. B.A.N.G. Peiris", subject: "Academic Staff" },
+  { name: "Mrs. A.M.R.P. Amarakoon", subject: "Academic Staff" },
+  { name: "Mrs. Rasika Peramunage", subject: "Academic Staff" },
+  { name: "Mrs. G.A. Waruni Chinthaki", subject: "Academic Staff" },
+  { name: "Mrs. H.A.D. Lakkika Lakmini", subject: "Academic Staff" },
+  { name: "Mrs. H.A.N. Maduwanthi Karunasekara", subject: "Academic Staff" },
+  { name: "Mrs. M.R. Sandamali", subject: "Academic Staff" },
+  { name: "Mrs. Chamila Ekanayake", subject: "Academic Staff" },
+  { name: "Mrs. K.R. Priyadarshani", subject: "Academic Staff" },
+  { name: "Mrs. R.M.D.N. Rathnayake", subject: "Academic Staff" },
+  { name: "Mrs. I.L.N.K. Somarathne", subject: "Academic Staff" },
+  { name: "Mrs. K.A.M.M. Gunathilaka", subject: "Academic Staff" },
+  { name: "Mrs. P.G.K.I. Perera (Attached)", subject: "Academic Staff" },
+  { name: "Mrs. N.N. Mendis", subject: "Academic Staff" },
+  { name: "Mrs. N.A.N. Sammani Bandara", subject: "Academic Staff" },
+  { name: "Mrs. L.S. Abeynayake", subject: "Academic Staff" },
+  { name: "Mrs. C.J. Jayathilaka", subject: "Academic Staff" },
+  { name: "Mrs. H.M.U.S.N. Hettiarachchi", subject: "Academic Staff" },
+  { name: "Mrs. D.S.N. Aluthge", subject: "Academic Staff" },
+  { name: "Mrs. W.K.A.P. Madushani", subject: "Academic Staff" },
+  { name: "Mr. A.G.T. Ranjana", subject: "Academic Staff" },
+  { name: "Miss A.J. Premawansha", subject: "Academic Staff" },
+  { name: "Mrs. K.M.C.A. Konara", subject: "Academic Staff" },
+  { name: "Mrs. D.P.P.T. Weerasinghe", subject: "Academic Staff" },
+  { name: "Mrs. U.M.C.S. Jayathilaka", subject: "Academic Staff" },
+  { name: "Mrs. R.M.V.A. Rathnayake", subject: "Academic Staff" },
+  { name: "Mrs. G.I.P. Perera (Attached)", subject: "Academic Staff" },
+  { name: "Mrs. P.K. Paranawithana", subject: "Academic Staff" },
+  { name: "Mrs. K.M.R.T. Perera", subject: "Academic Staff" },
+  { name: "Mrs. U.A.D.P.D. Uduwaka Arachchi", subject: "Academic Staff" },
+  { name: "Mrs. K.W.G. Thushari", subject: "Academic Staff" },
+  { name: "Mr. S.T. Jayathunga", subject: "Academic Staff" },
+  { name: "Mrs. K.A.N. Suraweera", subject: "Academic Staff" },
+  { name: "Mrs. P.P. Kaluarachchi", subject: "Academic Staff" },
+  { name: "Mrs. B.I.R. Perera", subject: "Academic Staff" },
+  { name: "Mrs. W.M.R.S. Wickramanayake", subject: "Academic Staff" },
+  { name: "Mrs. W.T.T. Yasharathne", subject: "Academic Staff" },
+  { name: "Mrs. R.M.N.D. Rathnayake", subject: "Academic Staff" },
+  { name: "Mrs. B.H. Marasinghe", subject: "Academic Staff" },
+  { name: "Mrs. H.K.G.C. Chathurani Samarakoon", subject: "Academic Staff" },
+  { name: "Mr. D.S. Amarasinghe", subject: "Academic Staff" },
+  { name: "Mrs. D.H. Dayananda", subject: "Academic Staff" },
+  { name: "Mrs. T.N. Chandani Suwaris", subject: "Academic Staff" },
+  { name: "Mrs. C.D. Jayarathne", subject: "Academic Staff" },
+  { name: "Mrs. P.L. Dinusha Chandani", subject: "Academic Staff" },
+  { name: "Mrs. W. Indra Kanthi", subject: "Academic Staff" },
+  { name: "Mrs. R.A.N.S. Gunathilaka", subject: "Academic Staff" },
+  { name: "Mrs. T.N. Godallage (Attached)", subject: "Academic Staff" },
+  { name: "Miss H.S.H. Perera", subject: "Academic Staff" },
+  { name: "Mrs. W.M.T.K. Samarasinghe", subject: "Academic Staff" },
 ];
 
 const nonAcademicStaff = [
@@ -88,6 +149,42 @@ const nonAcademicStaff = [
 ];
 
 export default function StaffPage() {
+  // Stats Data Calculation
+  const stats = [
+    { 
+      label: "Deputy Principals", 
+      count: deputyPrincipals.length, 
+      icon: StarIcon, 
+      color: "text-yellow-600", 
+      bg: "bg-yellow-50", 
+      border: "border-yellow-200" 
+    },
+    { 
+      label: "Assistant Principals", 
+      count: assistantPrincipals.length, 
+      icon: AcademicCapIcon, 
+      color: "text-purple-600", 
+      bg: "bg-purple-50", 
+      border: "border-purple-200" 
+    },
+{ 
+      label: "Academic Staff", 
+      count: academicStaff.length, 
+      icon: UserGroupIcon, 
+      color: "text-[#800000]", 
+      bg: "bg-[#800000]/10", 
+      border: "border-[#800000]/20" 
+    },
+    { 
+      label: "Non-Academic", 
+      count: nonAcademicStaff.length, 
+      icon: BriefcaseIcon, 
+      color: "text-blue-600", 
+      bg: "bg-blue-50", 
+      border: "border-blue-200" 
+    },
+  ];
+
   return (
     <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
       <Navbar />
@@ -111,7 +208,7 @@ export default function StaffPage() {
         </motion.div>
 
         {/* Overlay - Deep Maroon to match brand */}
-        <div className="absolute inset-0 bg-[#800000]/90 z-10" />
+        <div className="absolute inset-0 bg-[#500000]/90 z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
         
         {/* Content */}
@@ -145,7 +242,52 @@ export default function StaffPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
+      {/* --- STATS SECTION (Modern Row) --- */}
+      <div className="container mx-auto px-4 relative z-30 -mt-16 mb-16">
+      {/* Responsive Grid:
+         grid-cols-2 = Mobile වල කාඩ් දෙකක් පේළියට
+         lg:grid-cols-4 = ලොකු screen වල කාඩ් 4ක් පේළියට
+      */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+        {stats.map((stat, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }} // Scroll කරනකොට animate වෙන්න
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+          >
+            {/* Card Container */}
+            <div 
+              className={`
+                bg-white rounded-2xl shadow-lg hover:shadow-2xl 
+                transition-all duration-300 transform hover:-translate-y-2
+                border-2 ${stat.border} 
+                flex flex-col items-center justify-center
+                p-4 md:p-6 h-full
+              `}
+            >
+              {/* Icon Circle */}
+              <div className={`p-3 md:p-4 rounded-full mb-3 md:mb-4 ${stat.bg} ${stat.color}`}>
+                <stat.icon className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2.5} />
+              </div>
+
+              {/* Number Count */}
+              <h3 className="text-3xl md:text-5xl font-extrabold text-gray-900 mb-1 md:mb-2">
+                {stat.count}
+              </h3>
+
+              {/* Label Text */}
+              <p className="text-[10px] md:text-sm font-bold uppercase tracking-widest text-gray-500 text-center leading-tight">
+                {stat.label}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 relative z-10">
 
         {/* --- PRINCIPAL SECTION (Maroon Theme) --- */}
         <div className="mb-20 flex flex-col items-center">
@@ -181,40 +323,58 @@ export default function StaffPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 uppercase tracking-wide">
             Deputy Principals
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Deputy 1 */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="text-center bg-white border-t-4 border-t-yellow-500 shadow-xl hover:shadow-2xl transition-all p-8 hover:-translate-y-2 duration-300">
-                <CardContent className="pt-4">
-                  <div className="w-24 h-24 mx-auto bg-yellow-50 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-200">
-                     <StarIcon className="h-12 w-12 text-yellow-600" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Mrs. Subhashini Perera</h3>
-                  <p className="text-yellow-700 font-semibold bg-yellow-50 inline-block px-4 py-1 rounded-full text-sm">Deputy Principal</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto">
+            {deputyPrincipals.map((deputy, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="text-center h-full bg-white border-t-4 border-t-yellow-500 shadow-xl hover:shadow-2xl transition-all p-6 hover:-translate-y-2 duration-300">
+                  <CardContent className="pt-4">
+                    <div className="w-20 h-20 mx-auto bg-yellow-50 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-200">
+                      <StarIcon className="h-10 w-10 text-yellow-600" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{deputy.name}</h3>
+                    <p className="text-yellow-700 font-semibold bg-yellow-50 inline-block px-3 py-1 rounded-full text-xs md:text-sm">
+                      {deputy.role}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-            {/* Deputy 2 */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <Card className="text-center bg-white border-t-4 border-t-yellow-500 shadow-xl hover:shadow-2xl transition-all p-8 hover:-translate-y-2 duration-300">
-                <CardContent className="pt-4">
-                  <div className="w-24 h-24 mx-auto bg-yellow-50 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-200">
-                     <StarIcon className="h-12 w-12 text-yellow-600" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Mrs. Subhashini Perera</h3>
-                  <p className="text-yellow-700 font-semibold bg-yellow-50 inline-block px-4 py-1 rounded-full text-sm">Deputy Principal</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+        {/* --- ASSISTANT PRINCIPALS SECTION (New Section - Purple/Blue Theme) --- */}
+        <div className="mb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 uppercase tracking-wide">
+            Assistant Principals
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mx-auto">
+            {assistantPrincipals.map((assistant, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="text-center h-full bg-white border-t-4 border-t-purple-600 shadow-xl hover:shadow-2xl transition-all p-6 hover:-translate-y-2 duration-300">
+                  <CardContent className="pt-4">
+                    <div className="w-20 h-20 mx-auto bg-purple-50 rounded-full flex items-center justify-center mb-4 border-2 border-purple-200">
+                      <SparklesIcon className="h-10 w-10 text-purple-600" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{assistant.name}</h3>
+                    <p className="text-purple-700 font-semibold bg-purple-50 inline-block px-3 py-1 rounded-full text-xs md:text-sm">
+                      {assistant.role}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
 

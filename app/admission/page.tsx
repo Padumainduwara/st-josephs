@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link"; 
-import SchoolImage from "@/public/school-hero-image.png";
+import SchoolImage from "@/public/images/school-hero-image.png";
 import { CheckCircleIcon, DocumentTextIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 
 import {

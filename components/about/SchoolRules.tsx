@@ -17,7 +17,7 @@ import {
 
 export default function SchoolRules() {
   return (
-    <section className="py-16 md:py-24 bg-gray-50 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
         <div className="absolute top-10 right-10 w-40 h-40 md:w-64 md:h-64 bg-brand-primary rounded-full blur-3xl"></div>

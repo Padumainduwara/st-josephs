@@ -1,117 +1,92 @@
-// components/HeroSection.tsx
 "use client";
 
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
-import { Button } from "@/components/ui/button"; // <-- Aluthen import kala
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
-  // ... (Obage title, subtitle, variants code okkoma mehema thiyenawa)
-  const title = "Inspiring Futures at St. Joseph's";
-  const titleWords = title.split(" ");
-  const subtitle = "Nurturing young minds to achieve their full potential and shine bright.";
-  const subtitleWords = subtitle.split(" ");
-  const containerVariants: Variants = { /* ... */ };
-  const wordVariants: Variants = { /* ... */ };
-  const buttonVariants: Variants = { /* ... */ };
-  // ... (Mama code eka copy karanne nehe, obage file eke thiyena nisa)
-
   return (
-    <div className="relative h-screen min-h-[700px] flex items-center justify-center text-white overflow-hidden">
+    <div className="relative h-screen min-h-[600px] flex items-center justify-center text-white overflow-hidden">
+      
       {/* 1. Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="/school-hero-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      <div className="absolute inset-0 w-full h-full z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="object-cover w-full h-full opacity-90"
+        >
+          <source src="/school-hero-video.mp4" type="video/mp4" />
+        </video>
+      </div>
 
-      {/* 2. Custom Gradient Overlay */}
+      {/* 2. Custom Gradient Overlay (From Option 1) 
+         මෙන්න මේ කොටස තමයි Option 1 එකෙන් ගත්තේ.
+         මේකට අදාළ CSS එක ඔබේ globals.css එකේ තිබිය යුතුය.
+      */}
       <div className="absolute inset-0 z-10 hero-overlay"></div>
 
-      {/* 3. Content (Animated Text & Buttons) */}
-      <div className="relative z-20 text-center px-4 max-w-4xl lg:max-w-5xl mx-auto">
+      {/* 3. Content */}
+      {/* Overlay එක z-10 නිසා, අපි Content එක z-20 කරනවා */}
+      <div className="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
         
-        {/* 4. Animated Main Title */}
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight hero-text-shadow"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {titleWords.map((word, index) => (
-            <motion.span
-              key={index}
-              variants={wordVariants}
-              className="mr-3 md:mr-4"
-            >
-              {" "}
-              {word}
-            </motion.span>
-          ))}
+          <span className="inline-block py-1 px-3 rounded-full bg-yellow-500/20 border border-yellow-500/50 text-yellow-300 text-sm md:text-base font-semibold tracking-wider mb-6 backdrop-blur-md">
+            EST. 1942
+          </span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight text-white drop-shadow-2xl"
+        >
+          Inspiring <span className="text-yellow-400">Futures</span>
+          <br />
+          At St. Joseph's
         </motion.h1>
 
-        {/* 5. Animated Subtitle */}
         <motion.p
-          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-blue-100 max-w-2xl mx-auto hero-text-shadow"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            transitionDelay: "0.8s",
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-6 text-lg sm:text-xl md:text-2xl font-light text-gray-200 max-w-3xl mx-auto leading-relaxed"
         >
-          {subtitleWords.map((word, index) => (
-            <motion.span key={index} variants={wordVariants} className="mr-2">
-              {word}
-            </motion.span>
-          ))}
+          Nurturing young minds to achieve their full potential within a framework of 
+          <span className="font-semibold text-white"> faith, discipline,</span> and <span className="font-semibold text-white">excellence.</span>
         </motion.p>
 
-        {/* 6. ALUTH BUTTONS (MEKA THAMA WENASA) 
-          Parana Link tags, shadcn <Button> walin replace kala
-        */}
+        {/* Buttons */}
         <motion.div
-          className="mt-12 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6"
-          variants={buttonVariants}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-10 flex flex-col sm:flex-row gap-4"
         >
-          <Button asChild size="lg" className="text-xl px-8 py-7 shadow-lg transform transition-transform hover:scale-105">
+          <Button asChild size="lg" className="bg-[#800000] hover:bg-[#600000] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:scale-105 transition-transform">
             <Link href="/about">Explore Our School</Link>
           </Button>
-          <Button asChild variant="secondary" size="lg" className="text-xl px-8 py-7 shadow-lg transform transition-transform hover:scale-105">
-            {/* Admissions walata link eka damma */}
-            <Link href="/admission">Contact Admissions</Link>
+          <Button asChild variant="outline" size="lg" className="border-2 border-white text-black hover:bg-white hover:text-black text-lg px-8 py-6 rounded-full backdrop-blur-sm transition-transform hover:scale-105">
+            <Link href="/admission">Admissions</Link>
           </Button>
         </motion.div>
       </div>
 
-      {/* Optional: Scroll Down Indicator */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          repeat: Infinity,
-          duration: 1.5,
-          ease: "easeInOut",
-          delay: 2.5,
-        }}
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
+        transition={{ delay: 1, duration: 2, repeat: Infinity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 z-20"
       >
-        {/* ... (scroll indicator SVG eka) ... */}
+        <ChevronDown className="w-10 h-10" />
       </motion.div>
     </div>
   );
