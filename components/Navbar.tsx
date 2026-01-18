@@ -51,8 +51,8 @@ const navLinks = [
     items: [
       { title: "Prefects' Guild", href: "/prefects", description: "Student leadership body." },
       { title: "Clubs & Societies", href: "/clubs", description: "Extracurricular activities." },
-      { title: "Sports", href: "/sports", description: "Athletics and team sports." },
       { title: "Achievements", href: "/achievements", description: "Hall of fame & victories." },
+            { title: "Events", href: "/events", description: "School events & calendar." },
     ],
   },
   {
