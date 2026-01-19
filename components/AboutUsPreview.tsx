@@ -102,7 +102,7 @@ export default function AboutUsPreview() {
                   <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full -mr-4 -mt-4"></div>
                   <div className="absolute bottom-0 left-0 w-16 h-16 bg-yellow-500/20 rounded-tr-full -ml-4 -mb-4"></div>
                   
-                  <span className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-black text-yellow-400">80+</span>
+                  <span className="relative z-10 text-4xl md:text-5xl lg:text-6xl font-black text-yellow-400">84</span>
                   <span className="relative z-10 text-white/90 text-xs md:text-sm font-medium uppercase tracking-wider mt-1">Years of Service</span>
                </div>
             </div>

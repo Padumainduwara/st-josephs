@@ -35,7 +35,7 @@ export default function PrincipalMessage() {
           {/* --- Image Section (FIXED SIZE) --- */}
           {/* Changed width to lg:w-1/3 and added max-w-sm to prevent it from getting too big */}
           <div className="w-full max-w-sm lg:w-1/3 relative group mx-auto lg:mx-0">
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-100 ring-1 ring-gray-200">
+            <div className="relative aspect-[682/853] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-100 ring-1 ring-gray-200">
                {/* Image Container */}
               <Image
                 src="/images/principal.jpg" 
@@ -127,9 +127,6 @@ export default function PrincipalMessage() {
                     ))}
 
                     <div className="mt-8 pt-6 border-t border-gray-200 flex items-center gap-4">
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#800000]">
-                             <Image src="/images/principal.jpg" alt="Principal" fill className="object-cover" />
-                        </div>
                         <div>
                              <p className="font-bold text-xl text-[#800000] font-serif">Mrs. Rupa Rohini Silva</p>
                              <p className="text-gray-600 text-sm uppercase tracking-wider font-semibold">Principal</p>

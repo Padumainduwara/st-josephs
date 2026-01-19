@@ -6,8 +6,8 @@ import { motion } from "framer-motion";
 const houses = [
   { name: "Gonzaga", color: "bg-red-600", image: "/images/houses/gonzaga.png", textColor: "text-red-600" },
   { name: "Annemarie", color: "bg-green-600", image: "/images/houses/annemarie.png", textColor: "text-green-600" },
-  { name: "Leonid", color: "bg-yellow-500", image: "/images/houses/leonid.png", textColor: "text-yellow-600" },
-  { name: "Sebastian", color: "bg-blue-600", image: "/images/houses/sebastian.png", textColor: "text-blue-600" },
+  { name: "Sebastian", color: "bg-yellow-500", image: "/images/houses/leonid.png", textColor: "text-yellow-600" },
+  { name: "Leonid", color: "bg-blue-600", image: "/images/houses/sebastian.png", textColor: "text-blue-600" },
 ];
 
 export default function HouseSystem() {
