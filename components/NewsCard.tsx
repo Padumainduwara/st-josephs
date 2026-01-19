@@ -17,7 +17,7 @@ export default function NewsCard() {
   const title = "Annual Sports Meet 2025 Highlights";
   const date = "Oct 28, 2025";
   const excerpt = "A day of triumph, teamwork, and unforgettable moments...";
-  const imageUrl = "/school-hero-image.png"; 
+  const imageUrl = "/images/school-hero-image.png"; 
   const slug = "/news/annual-sports-meet"; 
 
   return (

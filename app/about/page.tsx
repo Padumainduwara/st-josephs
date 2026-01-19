@@ -1,7 +1,8 @@
-"use client";
+"use client"; 
 
+import { Metadata } from "next"; 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // Note: Since this is a client component, we handle metadata carefully.
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VisionMission from "@/components/about/VisionMission";
