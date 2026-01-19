@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import AboutUsPreview from "@/components/AboutUsPreview";
-import SchoolHighlights from "@/components/SchoolHighlights";
+import SchoolRules from "@/components/about/SchoolRules";
 import NewsAndEvents from "@/components/NewsAndEvents";
 import PrincipalMessage from "@/components/PrincipalMessage";
 import StatsSection from "@/components/StatsSection";
@@ -66,30 +66,32 @@ export default function Home() {
       <section aria-label="Welcome to St. Joseph's Girls' School">
         <HeroSection />
       </section>
-      
-      <article>
-        <StatsSection />
-      </article>
-      
-      <section className="py-12" aria-label="Message from our Principal">
-        <PrincipalMessage />
-      </section>
-      
+
       <section className="bg-gray-50 py-16" aria-label="About our School">
         <AboutUsPreview />
       </section>
       
-      <section className="py-16" aria-label="Our Core Values">
+      <section className="py-0" aria-label="Message from our Principal">
+        <PrincipalMessage />
+      </section>
+            
+      <article>
+        <StatsSection />
+      </article>
+      
+      <section className="py-0" aria-label="Our Core Values">
         <CoreValues />
       </section>
       
-      <section className="bg-white py-16" aria-label="School Highlights and Achievements">
-        <SchoolHighlights />
-      </section>
-      
-      <section className="py-16 bg-gray-50" id="news" aria-label="Latest News and Upcoming Events">
+      <section className="py-0 bg-gray-50" id="news" aria-label="Latest News and Upcoming Events">
         <NewsAndEvents />
       </section>
+
+      <section className="py-0" aria-label="School Rules and Regulations">
+        <SchoolRules />
+      </section>
+
+      
 
       <Footer />
     </main>
