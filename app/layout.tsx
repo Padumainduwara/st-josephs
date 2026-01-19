@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 
   // Verification for Search Consoles
   verification: {
-    google: "google-site-verification-code-here", // GSC code eka danna
+    google: "vM8UmgBLRCpDduwl2McnYhAQhdx9XNARwO86fAPPFMU", // GSC code eka danna
     yandex: "yandex-verification-code",
     other: {
       "bing-site-verification": "bing-code-here",
