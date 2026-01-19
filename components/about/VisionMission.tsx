@@ -38,7 +38,7 @@ export default function VisionMission() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="h-full"
         >
-          <Card className="h-full bg-gradient-to-br from-blue-50 to-white border-l-4 border-l-blue-800 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+          <Card className="h-full bg-gradient-to-br from-red-50 to-white border-l-4 border-l-red-800 shadow-lg hover:shadow-2xl transition-all duration-300 group">
             <CardContent className="p-6 md:p-10 flex flex-col items-center text-center">
               <div className="p-4 bg-blue-100 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Lightbulb className="w-8 h-8 md:w-10 md:h-10 text-blue-800" />
