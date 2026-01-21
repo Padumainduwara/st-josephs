@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// --- 1. WORLD CLASS SEO CONFIGURATION (GLOBAL) ---
+// --- 1. WORLD CLASS / MASTERS LEVEL SEO CONFIGURATION ---
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.stjosephsgirlsschool.com"), // Oya gaththa domain eka
+  metadataBase: new URL("https://www.stjosephsgirlsschool.com"),
   
   title: {
     default: "St. Joseph's Girls' School | Nugegoda | Premier Government School",
@@ -30,19 +30,26 @@ export const metadata: Metadata = {
     "National Schools Sri Lanka",
     "Catholic Girls Schools Sri Lanka",
     "Education in Nugegoda",
-    "School Admission Sri Lanka",
+    "School Admission Sri Lanka 2026",
     "St. Joseph's Nugegoda History",
+    "St. Joseph's Convent History",
     "Prefects Guild SJGS",
     "Top academic schools Sri Lanka",
     "STEM education girls",
-    "Sports Achievements Schools",
-    "Advanced Level Arts Commerce Science Maths"
-  ],
-  authors: [{ name: "St. Joseph's Girls' School Media Unit" }],
+    "Sports Achievements Schools Sri Lanka",
+    "Advanced Level Science Arts Commerce Maths"
+],
+  
+  authors: [{ name: "St. Joseph's Girls' School Media Unit", url: "https://www.stjosephsgirlsschool.com" }],
   creator: "St. Joseph's Girls' School",
   publisher: "St. Joseph's Girls' School",
-  
-  // Modern SEO: Instructions for AI Bots (SGE/AEO)
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
+  // Modern SEO: Instructions for AI Bots (SGE/AEO/ChatGPT)
   robots: {
     index: true,
     follow: true,
@@ -57,47 +64,61 @@ export const metadata: Metadata = {
     },
   },
 
-  // Trust & Authority (E-E-A-T)
+  // Trust & Authority (E-E-A-T) & Canonical URLs
   alternates: {
     canonical: "/",
+    languages: {
+      'en-US': '/en-US',
+      'si-LK': '/si-LK',
+    },
   },
 
-  // Social Media Optimization (Visual SEO)
+  // Social Media Optimization (Visual SEO - OG Tags)
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://www.stjosephsgirlsschool.com",
     siteName: "St. Joseph's Girls' School",
     title: "St. Joseph's Girls' School | Excellence in Education",
-    description: "Empowering the next generation of women leaders through faith, discipline, and knowledge.",
+    description: "Empowering the next generation of women leaders through faith, discipline, and knowledge. A prestigious 1AB National School.",
     images: [
       {
-        url: "/images/og-school-cover.jpg", // Make sure this image exists in public folder (1200x630px)
+        url: "/images/og-school-cover.jpg", // Ensure this image is high quality (1200x630)
         width: 1200,
         height: 630,
         alt: "St. Joseph's Girls' School Main Building",
+        type: "image/jpeg",
       },
     ],
   },
 
+  // Twitter / X Optimization
   twitter: {
     card: "summary_large_image",
     title: "St. Joseph's Girls' School Nugegoda",
     description: "Official website. Excellence in Education, Sports & Leadership.",
     images: ["/images/og-school-cover.jpg"],
-    creator: "@stjosephsnugegoda", // Twitter handle ekak hadala methanata danna
+    creator: "@stjosephsnugegoda",
+    site: "@stjosephsnugegoda",
   },
 
-  // Verification for Search Consoles
+  // Verification for Search Consoles (Essential for indexing)
   verification: {
-    google: "vM8UmgBLRCpDduwl2McnYhAQhdx9XNARwO86fAPPFMU", // GSC code eka danna
+    google: "vM8UmgBLRCpDduwl2McnYhAQhdx9XNARwO86fAPPFMU", // Your GSC Code
     yandex: "yandex-verification-code",
     other: {
       "bing-site-verification": "bing-code-here",
+      "facebook-domain-verification": "fb-code-here",
     },
   },
 
-  // App Specific
+  other: {
+    "geo.region": "LK-1", // Western Province
+    "geo.placename": "Nugegoda",
+    "geo.position": "6.8705;79.8807", // Exact Coordinates
+    "ICBM": "6.8705, 79.8807",
+  },
+
   applicationName: "SJGS Web Portal",
   category: "Education",
 };
@@ -117,13 +138,13 @@ export default function RootLayout({
 }>) {
   
   // --- 2. ADVANCED SCHEMA.ORG (JSON-LD) FOR AEO/SGE ---
-  // Meka thama AI SEO rahas. Google ta api kelinma data denawa structured widiyata.
+  // This helps Google's Knowledge Graph understand everything about the school.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "School", // Specific Type
+    "@type": "School", // Highly specific type
     "@id": "https://www.stjosephsgirlsschool.com/#school",
     "name": "St. Joseph's Girls' School",
-    "alternateName": ["SJGS Nugegoda", "St. Joseph's Convent Nugegoda"],
+    "alternateName": ["SJGS Nugegoda", "St. Joseph's Convent Nugegoda", "Nugegoda Girls School"],
     "url": "https://www.stjosephsgirlsschool.com",
     "logo": {
       "@type": "ImageObject",
@@ -132,11 +153,11 @@ export default function RootLayout({
       "height": 512
     },
     "image": "https://www.stjosephsgirlsschool.com/images/og-school-cover.jpg",
-    "description": "A prestigious 1AB government girls' school in Nugegoda, Sri Lanka.",
+    "description": "A prestigious 1AB government girls' school in Nugegoda, Sri Lanka, offering education from Grade 1 to 13.",
     "foundingDate": "1942-08-08",
     "slogan": "Glory to God Alone",
     
-    // E-E-A-T: Trust Signals
+    // Local SEO: Address & Map
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "High Level Road",
@@ -145,28 +166,50 @@ export default function RootLayout({
       "postalCode": "10250",
       "addressCountry": "LK"
     },
-    // Local SEO: Geo Coordinates (Check exact coords on Google Maps)
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 6.8705, 
       "longitude": 79.8807
     },
+    "hasMap": "https://maps.app.goo.gl/eh6XY9AMpNYbJ5DKA", // Add real Google Maps link
+    
+    // Contact Points
     "telephone": "+94-11-2822238",
     "email": "info@stjosephsgirlsschool.sch.lk",
-    
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+94-11-2822238",
+      "contactType": "admissions",
+      "areaServed": "LK",
+      "availableLanguage": ["English", "Sinhala"]
+    },
+
     // Knowledge Graph Connections
     "sameAs": [
       "https://www.facebook.com/stjosephsgirlsschool",
       "https://www.instagram.com/stjosephsgirlsschool",
       "https://www.youtube.com/@stjosephsgirlsschool",
-      "https://en.wikipedia.org/wiki/St._Joseph%27s_Girls%27_School" // Wikipedia thiyenawanm danna
+      "https://en.wikipedia.org/wiki/St._Joseph%27s_Girls%27_School"
     ],
     
-    // Organization Details
+    // Organizational Structure (E-E-A-T)
     "alumni": {
       "@type": "Organization",
-      "name": "St. Joseph's Girls' School Past Pupils' Association"
-    }
+      "name": "St. Joseph's Girls' School Past Pupils' Association",
+      "url": "https://www.stjosephsgirlsschool.com/alumni"
+    },
+    "department": [
+      {
+        "@type": "Organization",
+        "name": "Primary Section",
+        "url": "https://www.stjosephsgirlsschool.com/academics"
+      },
+      {
+        "@type": "Organization",
+        "name": "Science Section",
+        "url": "https://www.stjosephsgirlsschool.com/academics"
+      }
+    ]
   };
 
   return (

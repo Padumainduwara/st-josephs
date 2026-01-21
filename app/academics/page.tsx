@@ -8,7 +8,6 @@ import {
   BookOpenIcon, 
   PencilSquareIcon, 
   BeakerIcon, 
-  MusicalNoteIcon, 
   ComputerDesktopIcon, 
   PuzzlePieceIcon, 
   ArrowDownTrayIcon, 
@@ -16,7 +15,8 @@ import {
   CalculatorIcon,
   BriefcaseIcon,
   LanguageIcon,
-  FilmIcon
+  FilmIcon,
+  SparklesIcon
 } from "@heroicons/react/24/solid";
 
 import {
@@ -30,78 +30,119 @@ import { Badge } from "@/components/ui/badge";
 
 export default function AcademicsPage() {
   return (
-    <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
-      <Navbar />
-
-      {/* --- HERO SECTION --- */}
-      <div className="relative h-[450px] md:h-[550px] w-full overflow-hidden flex items-center justify-center">
-        
-        {/* 1. Background Image */}
-        <motion.div 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute inset-0 w-full h-full"
-        >
-          <Image
-            src="/images/IMG_6152.JPG" 
-            alt="Academic Excellence"
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-
-        {/* 2. OVERLAY */}
-        <div className="absolute inset-0 bg-[#500000]/95 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
-        
-        {/* 3. HERO CONTENT */}
-        <div className="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
-          
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-             <h1 className="text-4xl md:text-7xl lg:text-8xl font-extrabold text-white mb-6 tracking-tight drop-shadow-2xl">
-              Academic Excellence
-            </h1>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <p className="text-lg md:text-2xl lg:text-3xl text-yellow-300 font-serif italic max-w-3xl mx-auto drop-shadow-md leading-relaxed">
-              "Nurturing Wisdom & Character to achieve full potential."
+     <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
+          <Navbar />
+    
+          {/* --- HERO SECTION --- */}
+          <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden flex items-center justify-center">
+            
+            {/* 1. Background Image (Parallax) */}
+            <motion.div 
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* Using a general school image or specific activity image */}
+              <Image
+                src="/images/IMG_6162.JPG" 
+                alt="Student Life"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+    
+            {/* 2. OVERLAY: Deep Maroon Branding */}
+            <div className="absolute inset-0 bg-[#500000]/95 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+            
+            {/* 3. HERO CONTENT */}
+            <div className="relative z-20 text-center px-4 max-w-5xl mx-auto flex flex-col items-center">
+              
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                 <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-2xl">
+                  Academic Excellence
+                </h1>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <p className="text-lg md:text-2xl text-yellow-300 font-serif italic max-w-3xl mx-auto drop-shadow-md leading-relaxed">
+                  &quot;Nurturing Wisdom & Character to achieve full potential.&quot;
             </p>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-8 w-24 md:w-32 h-1.5 bg-yellow-400 rounded-full shadow-lg" 
-          />
-        </div>
-      </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+                className="mt-8 w-24 md:w-32 h-1.5 bg-yellow-400 rounded-full shadow-lg" 
+              />
+            </div>
+          </div>
 
       {/* --- MAIN CONTENT --- */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
           
         {/* Intro */}
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-primary mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
             A Comprehensive Curriculum
           </h2>
           <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-             From Grade 6 to Grade 13, our dedicated teachers ensure a continuous education journey, building a strong foundation for higher education and life.
+             From Grade 1 to Grade 13, our dedicated teachers ensure a continuous education journey, building a strong foundation for higher education and life.
           </p>
         </div>
 
-        {/* --- 1. MIDDLE SECTION (Grade 6-9) --- */}
+        {/* --- 1. NEW PRIMARY SECTION (Grade 1-5) --- */}
+        <div className="mb-20">
+            <Card className="bg-white border-l-4 border-l-rose-500 shadow-xl overflow-hidden">
+              <CardHeader className="bg-rose-50/50 pb-6 border-b border-rose-100">
+                  <div className="flex items-center gap-4">
+                     <div className="bg-rose-100 p-3 rounded-full">
+                        <SparklesIcon className="h-8 w-8 text-rose-600" />
+                     </div>
+                     <div>
+                        <CardTitle className="text-2xl md:text-3xl text-gray-900">Primary Section</CardTitle>
+                        <p className="text-rose-700 font-medium">Grade 1 - Grade 5</p>
+                     </div>
+                  </div>
+              </CardHeader>
+              <CardContent className="p-6 md:p-8">
+                  <p className="text-gray-700 leading-relaxed text-lg mb-8">
+                    The primary years focus on child-centered learning, fostering creativity, and building basic literacy and numeracy skills in a caring environment.
+                  </p>
+                  
+                  {/* Subjects Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    {[
+                      "Sinhala", 
+                      "English", 
+                      "Tamil", 
+                      "Environmental Science", 
+                      "Mathematics", 
+                      "Religion (Buddhism/ Christianity/ Catholic/Islam)", 
+                      "Hand Work"
+                    ].map((subject, idx) => (
+                       <div key={idx} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-rose-50 transition-colors border border-gray-100">
+                          <div className="h-2 w-2 rounded-full bg-rose-400 shrink-0" />
+                          <span className="text-gray-800 font-medium text-sm">{subject}</span>
+                       </div>
+                    ))}
+                  </div>
+              </CardContent>
+            </Card>
+        </div>
+
+        {/* --- 2. MIDDLE SECTION (Grade 6-9) --- */}
         <div className="mb-20">
             <Card className="bg-white border-l-4 border-l-orange-500 shadow-xl overflow-hidden">
               <CardHeader className="bg-orange-50/50 pb-6 border-b border-orange-100">
@@ -138,7 +179,7 @@ export default function AcademicsPage() {
             </Card>
         </div>
 
-        {/* --- 2. SECONDARY SECTION (Grade 10-11) --- */}
+        {/* --- 3. SECONDARY SECTION (Grade 10-11) --- */}
         <div className="mb-20">
             <Card className="bg-white border-l-4 border-l-blue-600 shadow-xl overflow-hidden">
               <CardHeader className="bg-blue-50/50 pb-6 border-b border-blue-100">
@@ -218,7 +259,7 @@ export default function AcademicsPage() {
             </Card>
         </div>
 
-        {/* --- 3. ADVANCED LEVEL (Grade 12-13) --- */}
+        {/* --- 4. ADVANCED LEVEL (Grade 12-13) --- */}
         <h3 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">Advanced Level</h3>
         <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12 text-lg">
             Ensuring a continuous education of 13 years, our school conducts studies up to Grade 13 under the following streams.
@@ -300,7 +341,6 @@ export default function AcademicsPage() {
                 </div>
               </CardHeader>
               <CardContent className="p-6">
-                 {/* LIST OF MANY ARTS SUBJECTS AS REQUESTED */}
                  <div className="flex flex-wrap justify-center gap-2">
                     {[
                         "History", "Geography", "Political Science", "Logic", 
@@ -327,12 +367,12 @@ export default function AcademicsPage() {
               {/* Calendar */}
               <div className="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors">
                 <div className="p-3 bg-white rounded-lg shadow-sm">
-                  <CalendarIcon className="h-8 w-8 text-brand-primary" />
+                  <CalendarIcon className="h-8 w-8 text-blue-600" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-gray-800">School Calendar</h4>
                   <p className="text-sm text-gray-500 mb-4 mt-1">Term dates and major events.</p>
-                  <Button variant="outline" className="text-brand-primary border-brand-primary hover:bg-brand-primary hover:text-white transition-colors">
+                  <Button variant="outline" className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors">
                     <ArrowDownTrayIcon className="h-4 w-4 mr-2" /> Download PDF
                   </Button>
                 </div>
@@ -341,12 +381,12 @@ export default function AcademicsPage() {
               {/* Book List */}
               <div className="flex items-start space-x-4 bg-gray-50 p-6 rounded-xl hover:bg-gray-100 transition-colors">
                 <div className="p-3 bg-white rounded-lg shadow-sm">
-                  <BookOpenIcon className="h-8 w-8 text-brand-primary" />
+                  <BookOpenIcon className="h-8 w-8 text-blue-600" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-gray-800">Book List 2025</h4>
                   <p className="text-sm text-gray-500 mb-4 mt-1">Required textbooks for all grades.</p>
-                  <Button variant="outline" className="text-brand-primary border-brand-primary hover:bg-brand-primary hover:text-white transition-colors">
+                  <Button variant="outline" className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white transition-colors">
                     <ArrowDownTrayIcon className="h-4 w-4 mr-2" /> Download List
                   </Button>
                 </div>
