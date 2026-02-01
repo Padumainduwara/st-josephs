@@ -15,7 +15,8 @@ import {
   MusicalNoteIcon,
   MicrophoneIcon,
   FaceSmileIcon,
-  BookOpenIcon
+  BookOpenIcon,
+  Squares2X2Icon 
 } from "@heroicons/react/24/solid";
 
 // --- TYPE DEFINITIONS ---
@@ -24,11 +25,11 @@ type AchievementItem = {
   award: string;
   level: string;
   desc?: string;
-  image?: string; // Image is optional now
-  type?: "music" | "drama" | "dance" | "media" | "sport" | "general"; // For icon fallback
+  image?: string; 
+  type?: "music" | "drama" | "dance" | "media" | "sport" | "general"; 
 };
 
-// --- DATA SOURCE (Updated with ALL items from Doc) ---
+// --- DATA SOURCE ---
 const achievements: Record<string, { title: string; items: AchievementItem[] }[]> = {
   sports: [
     {
@@ -91,27 +92,26 @@ const achievements: Record<string, { title: string; items: AchievementItem[] }[]
     {
       title: "Music Achievements",
       items: [
-        // --- NEW ITEMS FROM DOC (No Images - Using Icons) ---
         { 
           name: "Classical Music (Solo)", 
           award: "1st Place", 
           level: "Provincial", 
-          desc: "Achieved 1st place in the Junior category at the Provincial Level.", // Kept if you have it, else remove
+          desc: "Achieved 1st place in the Junior category at the Provincial Level.", 
           type: "music"
         },
         { 
           name: "Classical Music (Solo) - Junior", 
           award: "1st Place", 
           level: "Zonal Level", 
-          desc: "Outstanding performance in the Junior classical music category.", // Kept if you have it, else remove
-          type: "music" // No image
+          desc: "Outstanding performance in the Junior classical music category.", 
+          type: "music" 
         },
         { 
           name: "Classical Music (Solo) - Senior", 
           award: "1st Place", 
           level: "Zonal Level", 
           desc: "Top honors in the Senior classical music category.",
-          type: "music" // No image
+          type: "music" 
         },
         { 
           name: "Folk Music (Group) - Junior", 
@@ -125,7 +125,7 @@ const achievements: Record<string, { title: string; items: AchievementItem[] }[]
           award: "3rd Place", 
           level: "Provincial Level", 
           desc: "Secured 3rd place in the highly competitive Provincial meet.",
-          type: "music" // No image
+          type: "music" 
         },
       ]
     },
@@ -145,7 +145,7 @@ const achievements: Record<string, { title: string; items: AchievementItem[] }[]
           award: "1st Place", 
           level: "Provincial Level", 
           desc: "Winner of the Provincial level miming competition.",
-          type: "drama" // No image
+          type: "drama" 
         },
         { 
           name: "Character Modeling (Solo)", 
@@ -181,14 +181,14 @@ const achievements: Record<string, { title: string; items: AchievementItem[] }[]
           award: "1st Place", 
           level: "Divisional Level", 
           desc: "Primary students showing excellence in divisional drama.",
-          type: "drama" // No image
+          type: "drama" 
         },
         { 
           name: "Primary Drama", 
           award: "3rd Place", 
           level: "Zonal Level", 
           desc: "Placed 3rd in the Zonal level primary competitions.",
-          type: "drama" // No image
+          type: "drama" 
         },
       ]
     },
@@ -280,31 +280,92 @@ export default function AchievementsPage() {
       {/* --- CONTENT SECTION --- */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         
-        <Tabs defaultValue="sports" className="w-full">
+        <Tabs defaultValue="all" className="w-full">
           
-          {/* Tabs Navigation */}
+          {/* Tabs Navigation (Responsive Layout) */}
           <div className="flex justify-center mb-12">
-            <TabsList className="flex flex-wrap justify-center w-full max-w-3xl h-auto gap-2 p-2 bg-white rounded-2xl md:rounded-full shadow-md border border-gray-100">
+            <TabsList className="flex flex-wrap justify-center w-full max-w-4xl h-auto gap-2 p-2 bg-white rounded-2xl md:rounded-full shadow-md border border-gray-100">
+              
+              {/* "ALL" Button - Full width on Mobile, Auto on Desktop */}
+              <TabsTrigger 
+                value="all" 
+                className="w-full md:w-auto md:flex-1 min-w-[100px] text-sm md:text-lg px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-gray-800 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
+              >
+                <Squares2X2Icon className="w-5 h-5" /> All
+              </TabsTrigger>
+
+              {/* Other Buttons - Shared Row on Mobile */}
               <TabsTrigger 
                 value="sports" 
-                className="flex-1 min-w-[120px] text-sm md:text-lg px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
+                className="flex-1 min-w-[90px] md:min-w-[120px] text-sm md:text-lg px-3 md:px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
               >
                 <TrophyIcon className="w-5 h-5" /> Sports
               </TabsTrigger>
               <TabsTrigger 
                 value="aesthetic" 
-                className="flex-1 min-w-[120px] text-sm md:text-lg px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-[#800000] data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
+                className="flex-1 min-w-[90px] md:min-w-[120px] text-sm md:text-lg px-3 md:px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-[#800000] data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
               >
                 <MusicalNoteIcon className="w-5 h-5" /> Aesthetic
               </TabsTrigger>
               <TabsTrigger 
                 value="cocurricular" 
-                className="flex-1 min-w-[120px] text-sm md:text-lg px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-green-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
+                className="flex-1 min-w-[90px] md:min-w-[120px] text-sm md:text-lg px-3 md:px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-green-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
               >
                 <MicrophoneIcon className="w-5 h-5" /> Co-Curricular
               </TabsTrigger>
             </TabsList>
           </div>
+
+          {/* --- ALL CONTENT TAB --- */}
+          <TabsContent value="all" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+             
+             {/* Sports Section in All */}
+             {achievements.sports.map((section, idx) => (
+              <div key={`all-sport-${idx}`}>
+                <div className="flex items-center gap-3 mb-8">
+                   <div className="h-8 w-2 md:h-10 bg-blue-600 rounded-full"></div>
+                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Sports)</span></h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {section.items.map((item, i) => (
+                    <AchievementCard key={i} item={item} colorClass="bg-blue-600" />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Aesthetic Section in All */}
+            {achievements.aesthetic.map((section, idx) => (
+              <div key={`all-aes-${idx}`}>
+                 <div className="flex items-center gap-3 mb-8">
+                   <div className="h-8 w-2 md:h-10 bg-[#800000] rounded-full"></div>
+                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Aesthetic)</span></h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {section.items.map((item, i) => (
+                    <AchievementCard key={i} item={item} colorClass="bg-[#800000]" />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Co-Curricular Section in All */}
+            {achievements.cocurricular.map((section, idx) => (
+              <div key={`all-co-${idx}`}>
+                <div className="flex items-center gap-3 mb-8">
+                   <div className="h-8 w-2 md:h-10 bg-green-600 rounded-full"></div>
+                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Co-Curricular)</span></h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {section.items.map((item, i) => (
+                    <AchievementCard key={i} item={item} colorClass="bg-green-600" />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+          </TabsContent>
+
 
           {/* --- SPORTS TAB --- */}
           <TabsContent value="sports" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
