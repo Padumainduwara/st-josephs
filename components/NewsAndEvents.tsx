@@ -6,7 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
-import { CalendarDays, ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
+import Image from "next/image";
 import {
   Carousel,
   CarouselContent,
@@ -18,7 +19,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
@@ -29,6 +29,7 @@ interface NewsItem {
   title: string;
   date: string;
   description: string;
+  image_url?: string | null;
 }
 
 export default function NewsAndEvents() {
@@ -116,12 +117,11 @@ export default function NewsAndEvents() {
                     transition={{ delay: index * 0.1 }}
                     className="h-full"
                   >
-                    {/* --- CARD DESIGN (Shorter & Cleaner) --- */}
-                    {/* h-[350px] is much shorter now */}
-                    <Card className="h-[300px] flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#800000]/30 group border-gray-200 bg-white overflow-hidden relative">
+                    {/* --- CARD DESIGN --- */}
+                    <Card className="h-[350px] flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#800000]/30 group border-gray-200 bg-white overflow-hidden relative">
                       
                       <CardHeader className="items-center text-center pb-0 pt-6">
-                        {/* Date Circle - Smaller (w-16 h-16) */}
+                        {/* Date Circle */}
                         <div className="bg-red-50 w-16 h-16 rounded-full mb-3 group-hover:bg-[#800000] transition-colors duration-500 flex flex-col items-center justify-center border border-red-100 group-hover:border-[#800000] shadow-sm">
                           <span className="text-xs font-bold text-[#800000] group-hover:text-white uppercase leading-none transition-colors duration-300">
                             {new Date(item.date).toLocaleDateString('en-US', { month: 'short' })}
@@ -131,24 +131,24 @@ export default function NewsAndEvents() {
                           </span>
                         </div>
 
-                        {/* Title - Smaller Font */}
+                        {/* Title */}
                         <CardTitle className="text-lg text-[#800000] font-bold leading-tight line-clamp-2 h-[3rem] flex items-center justify-center font-serif px-2">
                           {item.title}
                         </CardTitle>
                       </CardHeader>
                       
                       <CardContent className="text-center flex flex-col flex-grow px-4 mt-2">
-                        {/* Description - Line Clamp 3 (Less Text) */}
+                        {/* Description */}
                         <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
                           {item.description}
                         </p>
                         
-                        {/* Read More Button - Compact */}
+                        {/* Read More Button - ALWAYS VISIBLE ("Thada") */}
                         <div className="mt-auto pb-4 w-full">
                            <Button 
                              onClick={() => openPopup(item)}
-                             variant="ghost"
-                             className="text-[10px] font-bold text-gray-400 group-hover:text-[#800000] uppercase tracking-widest hover:bg-red-50 h-8 px-4 rounded-full transition-colors border border-transparent group-hover:border-red-100"
+                             className="w-full text-xs font-bold uppercase tracking-widest h-9 rounded-full transition-all border shadow-sm
+                                        bg-red-50 text-[#800000] border-red-100 hover:bg-[#800000] hover:text-white hover:border-[#800000]"
                            >
                              Read Details <ArrowRight className="w-3 h-3 ml-2 transition-transform group-hover:translate-x-1" />
                            </Button>
@@ -180,37 +180,58 @@ export default function NewsAndEvents() {
 
       </div>
 
-      {/* --- POPUP DIALOG (Matching Text Style) --- */}
+      {/* --- POPUP DIALOG --- */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-xl bg-white p-0 overflow-hidden rounded-xl border-0 shadow-2xl">
+        <DialogContent className="max-w-2xl bg-white p-0 overflow-hidden rounded-xl border-0 shadow-2xl h-[90vh] md:h-auto flex flex-col">
           {selectedNews && (
             <>
-              {/* Header Design */}
-              <div className="bg-[#800000] p-6 text-white relative">
-                 <div className="flex items-center gap-3 mb-3 opacity-90">
-                    <span className="bg-yellow-500 text-[#800000] text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                        News
-                    </span>
-                    <span className="flex items-center gap-1 text-xs font-medium text-gray-200">
-                        <Clock className="w-3 h-3" />
-                        {new Date(selectedNews.date).toLocaleDateString('en-US', { dateStyle: 'long' })}
-                    </span>
-                </div>
+              {/* Header / Image Area */}
+              <div className="relative">
+                {selectedNews.image_url ? (
+                  <div className="relative w-full h-48 md:h-64 bg-gray-100">
+                    <Image 
+                      src={selectedNews.image_url} 
+                      alt={selectedNews.title} 
+                      fill 
+                      className="object-cover"
+                      unoptimized 
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  </div>
+                ) : (
+                  /* Fallback Header */
+                  <div className="w-full h-32 bg-[#800000] relative overflow-hidden">
+                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+                  </div>
+                )}
 
-                <DialogTitle className="text-2xl font-bold font-serif leading-snug">
-                  {selectedNews.title}
-                </DialogTitle>
+                {/* Title & Info Overlay */}
+                <div className={`absolute bottom-0 left-0 w-full p-6 text-white ${!selectedNews.image_url ? 'h-full flex flex-col justify-end' : ''}`}>
+                   <div className="flex items-center gap-3 mb-2 opacity-90">
+                      <span className="bg-yellow-500 text-[#800000] text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider shadow-sm">
+                          News Update
+                      </span>
+                      <span className="flex items-center gap-1 text-xs font-medium text-gray-100 drop-shadow-md">
+                          <Clock className="w-3 h-3" />
+                          {new Date(selectedNews.date).toLocaleDateString('en-US', { dateStyle: 'long' })}
+                      </span>
+                  </div>
+                  <DialogTitle className="text-2xl md:text-3xl font-bold font-serif leading-tight drop-shadow-md">
+                    {selectedNews.title}
+                  </DialogTitle>
+                </div>
               </div>
 
-              {/* Content with Matching Styles */}
-              <div className="p-6 max-h-[60vh] overflow-y-auto">
-                <DialogDescription className="text-gray-700 text-base leading-relaxed whitespace-pre-wrap font-sans">
+              {/* Scrollable Content */}
+              <div className="p-6 md:p-8 flex-1 overflow-y-auto">
+                <DialogDescription className="text-gray-700 text-base md:text-lg leading-relaxed whitespace-pre-wrap font-sans">
                   {selectedNews.description}
                 </DialogDescription>
               </div>
 
               {/* Footer */}
-              <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end">
+              <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end shrink-0">
                 <Button 
                     onClick={() => setIsDialogOpen(false)}
                     variant="outline"
@@ -223,7 +244,6 @@ export default function NewsAndEvents() {
           )}
         </DialogContent>
       </Dialog>
-
     </section>
   );
 }

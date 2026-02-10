@@ -17,8 +17,12 @@ import {
   AlertCircle, 
   X, 
   Pencil, 
-  RefreshCw 
+  RefreshCw,
+  UploadCloud,
+  ImageIcon
 } from "lucide-react";
+import Image from "next/image";
+import imageCompression from 'browser-image-compression'; 
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- Types ---
@@ -27,9 +31,10 @@ interface NewsItem {
   title: string;
   date: string;
   description: string;
+  image_url?: string | null; // Added Image URL
 }
 
-// --- Custom Toast Notification ---
+// --- Toast Component ---
 const Toast = ({ message, type, onClose }: { message: string, type: 'success' | 'error', onClose: () => void }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, 4000);
@@ -68,9 +73,13 @@ export default function AdminNewsPage() {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [editingId, setEditingId] = useState<string | null>(null); // Track ID if editing
+  const [editingId, setEditingId] = useState<string | null>(null);
+  
+  // Image States
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [compressing, setCompressing] = useState(false);
 
-  // Notification State
   const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
 
   // --- Fetch News ---
@@ -90,70 +99,130 @@ export default function AdminNewsPage() {
     fetchNews();
   }, []);
 
+  // --- Image Handling ---
+  const handleImageSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setCompressing(true);
+    try {
+      const options = {
+        maxSizeMB: 0.5, // 500KB Max
+        maxWidthOrHeight: 1200,
+        useWebWorker: true,
+        fileType: "image/jpeg"
+      };
+
+      const compressedFile = await imageCompression(file, options);
+      setSelectedImage(compressedFile);
+      setPreviewUrl(URL.createObjectURL(compressedFile));
+
+    } catch (error) {
+      console.error("Compression error:", error);
+      setSelectedImage(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    } finally {
+      setCompressing(false);
+    }
+  };
+
+  const removeImage = () => {
+    setSelectedImage(null);
+    setPreviewUrl(null);
+  };
+
   // --- Reset Form ---
   const resetForm = () => {
     setTitle("");
     setDate("");
     setDescription("");
+    setSelectedImage(null);
+    setPreviewUrl(null);
     setEditingId(null);
   };
 
-  // --- Handle Submit (Add or Update) ---
+  // --- Handle Submit ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !date || !description) {
-      setNotification({ message: "Please fill all fields.", type: "error" });
+      setNotification({ message: "Please fill all required fields.", type: "error" });
       return;
     }
 
     setLoading(true);
 
     try {
+      let imageUrl = previewUrl; // Keep existing URL if editing and not changed
+
+      // Upload new image if selected
+      if (selectedImage) {
+        const fileExt = selectedImage.name.split('.').pop();
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('news-images')
+          .upload(fileName, selectedImage);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('news-images')
+          .getPublicUrl(fileName);
+        
+        imageUrl = publicUrl;
+      }
+
+      const newsData = { 
+        title, 
+        date, 
+        description,
+        image_url: imageUrl 
+      };
+
       if (editingId) {
-        // UPDATE Existing News
         const { error } = await supabase
           .from('news')
-          .update({ title, date, description })
+          .update(newsData)
           .eq('id', editingId);
 
         if (error) throw error;
         setNotification({ message: "News Updated Successfully!", type: "success" });
       } else {
-        // INSERT New News
         const { error } = await supabase
           .from('news')
-          .insert([{ title, date, description }]);
+          .insert([newsData]);
 
         if (error) throw error;
         setNotification({ message: "News Posted Successfully!", type: "success" });
       }
 
       resetForm();
-      fetchNews(); // Refresh list
+      fetchNews();
 
     } catch (error) {
       console.error(error);
-      setNotification({ message: "Operation failed. Please try again.", type: "error" });
+      setNotification({ message: "Operation failed.", type: "error" });
     } finally {
       setLoading(false);
     }
   };
 
-  // --- Handle Edit Click ---
+  // --- Handle Edit ---
   const handleEdit = (item: NewsItem) => {
     setTitle(item.title);
     setDate(item.date);
     setDescription(item.description);
+    setPreviewUrl(item.image_url || null);
+    setSelectedImage(null); // Reset file selection
     setEditingId(item.id);
     
-    // Smooth scroll to top for mobile users to see form
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setNotification({ message: "Editing mode enabled.", type: "success" });
   };
 
   // --- Handle Delete ---
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this news item?")) return;
+    if (!confirm("Are you sure?")) return;
 
     try {
       const { error } = await supabase.from('news').delete().eq('id', id);
@@ -161,19 +230,16 @@ export default function AdminNewsPage() {
       
       setNotification({ message: "News Deleted Successfully", type: "success" });
       setNewsList(prev => prev.filter(item => item.id !== id));
-      
-      // If we deleted the item being edited, reset form
       if (editingId === id) resetForm();
 
     } catch (error) {
       console.error(error);
-      setNotification({ message: "Failed to delete news.", type: "error" });
+      setNotification({ message: "Failed to delete.", type: "error" });
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50/50 p-4 md:p-8">
-      {/* Toast Notification Container */}
       <AnimatePresence>
         {notification && (
           <Toast 
@@ -186,7 +252,7 @@ export default function AdminNewsPage() {
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
         
-        {/* --- LEFT: FORM SECTION (2 Columns on Large Screen) --- */}
+        {/* --- FORM SECTION --- */}
         <div className="lg:col-span-2 space-y-6">
           <div className="mb-2">
             <h1 className="text-2xl font-bold text-gray-900 font-serif">Manage News</h1>
@@ -211,7 +277,7 @@ export default function AdminNewsPage() {
             </CardHeader>
             <CardContent className="p-5 space-y-4">
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Headline</Label>
+                <Label className="text-xs font-semibold text-gray-600 uppercase">Headline</Label>
                 <Input 
                   value={title} 
                   onChange={e => setTitle(e.target.value)} 
@@ -221,7 +287,7 @@ export default function AdminNewsPage() {
               </div>
               
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Date</Label>
+                <Label className="text-xs font-semibold text-gray-600 uppercase">Date</Label>
                 <Input 
                   type="date" 
                   value={date} 
@@ -231,7 +297,7 @@ export default function AdminNewsPage() {
               </div>
 
               <div className="space-y-1.5">
-                <Label className="text-xs font-semibold text-gray-600 uppercase tracking-wide">Description</Label>
+                <Label className="text-xs font-semibold text-gray-600 uppercase">Description</Label>
                 <Textarea 
                   value={description} 
                   onChange={e => setDescription(e.target.value)} 
@@ -240,23 +306,57 @@ export default function AdminNewsPage() {
                 />
               </div>
 
+              {/* Image Upload */}
+              <div className="space-y-2">
+                <Label className="text-xs font-semibold text-gray-600 uppercase">Cover Image (Optional)</Label>
+                
+                {!previewUrl ? (
+                  <div className={`border-2 border-dashed rounded-lg p-6 text-center transition-all relative group ${
+                      compressing ? "bg-gray-50" : "hover:border-[#800000] hover:bg-red-50/20"
+                  }`}>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleImageSelect}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      disabled={compressing}
+                    />
+                    <div className="flex flex-col items-center gap-2">
+                      {compressing ? (
+                         <Loader2 className="w-6 h-6 text-[#800000] animate-spin" />
+                      ) : (
+                         <UploadCloud className="w-8 h-8 text-gray-400 group-hover:text-[#800000]" />
+                      )}
+                      <p className="text-xs font-medium text-gray-500">
+                          {compressing ? "Optimizing..." : "Upload Image"}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative w-full h-40 rounded-lg overflow-hidden border border-gray-200 group">
+                    <Image src={previewUrl} alt="Preview" fill className="object-cover" />
+                    <button 
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute top-2 right-2 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:scale-110"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+
               <div className="pt-2 flex gap-3">
                 <Button 
                   onClick={handleSubmit} 
-                  disabled={loading} 
+                  disabled={loading || compressing} 
                   className={`flex-1 h-10 text-sm font-bold shadow-sm ${
                     editingId 
                       ? "bg-yellow-500 hover:bg-yellow-600 text-white" 
                       : "bg-[#800000] hover:bg-[#600000] text-white"
                   }`}
                 >
-                  {loading ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : editingId ? (
-                    "Update News"
-                  ) : (
-                    "Post News"
-                  )}
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : editingId ? "Update News" : "Post News"}
                 </Button>
 
                 {editingId && (
@@ -274,7 +374,7 @@ export default function AdminNewsPage() {
           </Card>
         </div>
 
-        {/* --- RIGHT: LIST SECTION (3 Columns on Large Screen) --- */}
+        {/* --- LIST SECTION --- */}
         <div className="lg:col-span-3 space-y-6">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-lg font-bold text-gray-800">Recent Posts</h2>
@@ -303,19 +403,35 @@ export default function AdminNewsPage() {
               newsList.map((item) => (
                 <div 
                   key={item.id} 
-                  className={`bg-white p-4 rounded-lg border shadow-sm transition-all duration-200 group flex gap-4 ${
+                  className={`bg-white p-3 rounded-lg border shadow-sm transition-all duration-200 group flex gap-4 ${
                     editingId === item.id 
                         ? 'border-yellow-400 ring-1 ring-yellow-400 bg-yellow-50/30' 
                         : 'border-gray-100 hover:border-gray-300 hover:shadow-md'
                   }`}
                 >
+                   {/* Thumbnail */}
+                   <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
+                    {item.image_url ? (
+                      <Image 
+                        src={item.image_url} 
+                        alt="Thumb" 
+                        fill 
+                        className="object-cover" 
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-gray-300">
+                        <ImageIcon className="w-5 h-5" />
+                      </div>
+                    )}
+                  </div>
+
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 text-[#800000] text-xs font-bold mb-1.5 uppercase tracking-wide">
+                    <div className="flex items-center gap-2 text-[#800000] text-xs font-bold mb-1 uppercase tracking-wide">
                       <CalendarDays className="w-3 h-3" />
                       {new Date(item.date).toLocaleDateString()}
                     </div>
-                    <h3 className="font-bold text-gray-900 text-base leading-snug mb-1.5 truncate">
+                    <h3 className="font-bold text-gray-900 text-sm leading-snug mb-1 truncate">
                         {item.title}
                     </h3>
                     <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
@@ -324,10 +440,10 @@ export default function AdminNewsPage() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex flex-col gap-2 justify-center border-l pl-4 border-gray-100">
+                  <div className="flex flex-col gap-1 justify-center border-l pl-3 border-gray-100">
                     <button 
                       onClick={() => handleEdit(item)}
-                      className={`p-2 rounded-full transition-colors ${
+                      className={`p-1.5 rounded-full transition-colors ${
                         editingId === item.id 
                             ? 'bg-yellow-100 text-yellow-700' 
                             : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50'
@@ -338,7 +454,7 @@ export default function AdminNewsPage() {
                     </button>
                     <button 
                       onClick={() => handleDelete(item.id)}
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                      className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-colors"
                       title="Delete"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -349,7 +465,6 @@ export default function AdminNewsPage() {
             )}
           </div>
         </div>
-
       </div>
     </div>
   );
