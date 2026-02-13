@@ -212,17 +212,17 @@ export default function ClubsPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="mt-20 max-w-4xl mx-auto bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 text-center shadow-2xl relative overflow-hidden">
+        <div className="mt-20 max-w-4xl mx-auto bg-gradient-to-r from-gray-200 to-gray-300 rounded-3xl p-8 md:p-12 text-center shadow-2xl relative overflow-hidden">
            <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
            
-           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10">
+           <h3 className="text-2xl md:text-3xl font-bold text-black mb-4 relative z-10">
              Want to start a new club?
            </h3>
-           <p className="text-gray-300 mb-8 max-w-2xl mx-auto relative z-10">
+           <p className="text-black mb-8 max-w-2xl mx-auto relative z-10">
              Students are encouraged to take initiative. If you have a passion that isn&apos;t represented, 
              speak to the Deputy Principal about forming a new society.
            </p>
-           <Button className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-6 text-lg rounded-xl shadow-lg relative z-10">
+           <Button className="bg-[#800000] hover:bg-[#600000] text-white font-bold px-8 py-6 text-lg rounded-xl shadow-lg relative z-10">
              Contact Administration <ArrowTopRightOnSquareIcon className="h-5 w-5 ml-2" />
            </Button>
         </div>

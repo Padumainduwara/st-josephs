@@ -12,7 +12,7 @@ export default function SchoolHistory() {
           viewport={{ once: true }}
           className="text-center mb-10 md:mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">From a Convent to College</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">From a Convent to School</h2>
           <div className="w-20 md:w-24 h-1.5 bg-brand-primary mx-auto rounded-full"></div>
         </motion.div>
 

@@ -71,10 +71,8 @@ const Logo = ({ className, isMobile = false }: { className?: string, isMobile?: 
     <Image
       src={SchoolLogo}
       alt="St. Joseph's Logo"
-      width={isMobile ? 40 : 56}
-      height={isMobile ? 40 : 56}
       priority
-      className="transition-all duration-300 w-10 h-10 md:w-12 md:h-12"
+      className="transition-all duration-300 h-10 w-auto md:h-12"
     />
     <div className="flex flex-col leading-tight">
       {/* UPDATE: Font size reduced (text-lg -> text-base, text-2xl -> text-xl) */}

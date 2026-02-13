@@ -146,7 +146,7 @@ export default function PrefectsPage() {
             </div>
 
             {/* DEPUTY HEAD PREFECTS */}
-            <h3 className="text-xl md:text-2xl font-bold text-center text-gray-700 mb-10 uppercase tracking-wide">
+            <h3 className="text-xl md:text-2xl font-bold text-center text-black mb-10 uppercase tracking-wide">
                Deputy Head Prefects
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -158,10 +158,10 @@ export default function PrefectsPage() {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Card className="text-center h-full bg-white border-t-4 border-t-yellow-500 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2 duration-300">
+                        <Card className="text-center h-full bg-white border-t-4 border-[#800000] shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2 duration-300">
                             <CardContent className="pt-4">
                                 {/* Deputy Image */}
-                                <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-yellow-400 shadow-md overflow-hidden relative">
+                                <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-[#800000] shadow-md overflow-hidden relative">
                                     <Image 
                                         src={member.image}
                                         alt={member.name}
@@ -170,7 +170,7 @@ export default function PrefectsPage() {
                                     />
                                 </div>
                                 <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                                <p className="text-yellow-700 font-semibold text-sm">{member.role}</p>
+                                <p className="text-[#800000] font-semibold text-sm">{member.role}</p>
                             </CardContent>
                         </Card>
                     </motion.div>
@@ -181,7 +181,7 @@ export default function PrefectsPage() {
         {/* --- GAMES CAPTAINS SECTION --- */}
         <div className="mb-24">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 uppercase tracking-wide flex items-center justify-center gap-3">
-               <TrophyIcon className="h-8 w-8 text-blue-600" /> 
+               <TrophyIcon className="h-8 w-8 text-[#800000]" /> 
                Games Captains
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
@@ -192,9 +192,9 @@ export default function PrefectsPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <Card className="text-center h-full bg-white border-t-4 border-t-blue-600 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                    <Card className="text-center h-full bg-white border-t-4 border-t-[#800000] shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
                         <CardContent className="pt-4">
-                            <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-blue-600 shadow-md overflow-hidden relative">
+                            <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-[#800000] shadow-md overflow-hidden relative">
                                 <Image 
                                     src="/images/prefects/perera-wasm.jpg" // RENAME FILE TO THIS
                                     alt="W. A. S. M. Perera"
@@ -203,7 +203,7 @@ export default function PrefectsPage() {
                                 />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. S. M. Perera</h3>
-                            <Badge className="bg-blue-600 hover:bg-blue-700 text-sm py-1 px-4">Games Captain</Badge>
+                            <Badge className="bg-[#800000] hover:bg-[#600000] text-sm py-1 px-4">Games Captain</Badge>
                         </CardContent>
                     </Card>
                 </motion.div>
@@ -214,9 +214,9 @@ export default function PrefectsPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <Card className="text-center h-full bg-white border-t-4 border-t-blue-400 shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
+                    <Card className="text-center h-full bg-white border-t-4 border-t-[#800000] shadow-lg hover:shadow-xl transition-all p-6 hover:-translate-y-2">
                         <CardContent className="pt-4">
-                             <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-blue-400 shadow-md overflow-hidden relative">
+                             <div className="w-32 h-32 mx-auto rounded-full mb-4 border-4 border-[#800000] shadow-md overflow-hidden relative">
                                 <Image 
                                     src="/images/prefects/jesni.jpg" // RENAME FILE TO THIS
                                     alt="W. A. D. M. S. Jesni"
@@ -225,7 +225,7 @@ export default function PrefectsPage() {
                                 />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-2">W. A. D. M. S. Jesni</h3>
-                            <Badge className="bg-blue-500 hover:bg-blue-600 text-sm py-1 px-4">Vice Games Captain</Badge>
+                            <Badge className="bg-[#800000] hover:bg-[#600000] text-sm py-1 px-4">Vice Games Captain</Badge>
                         </CardContent>
                     </Card>
                 </motion.div>
