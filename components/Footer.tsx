@@ -18,7 +18,7 @@ export default function Footer() {
                 alt="St. Joseph's Logo"
                 width={50}
                 height={50}
-                cclassName="transition-all duration-300 h-10 w-auto md:h-12"
+                className="transition-all duration-300 h-10 w-auto md:h-12"
               />
               <span className="text-2xl font-bold text-white">
                 St. Joseph's
