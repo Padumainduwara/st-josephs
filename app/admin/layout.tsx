@@ -4,16 +4,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Calendar, Newspaper, LogOut, Menu, ShieldCheck } from "lucide-react";
+import { Calendar, Newspaper, LogOut, Menu, ShieldCheck, Trophy } from "lucide-react"; // Trophy icon added
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { logout } from "@/app/actions/auth";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -29,11 +24,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const menuItems = [
     { title: "Manage Events", href: "/admin/events", icon: Calendar },
     { title: "Manage News", href: "/admin/news", icon: Newspaper },
+    { title: "Achievements", href: "/admin/achievements", icon: Trophy }, // Added this
   ];
 
   const SidebarContent = ({ isMobile = false }) => (
     <div className="flex flex-col h-full text-white bg-[#800000]">
-      {/* Header Area */}
       <div className="p-6 border-b border-red-900 flex items-center gap-3">
          <div className="bg-white/10 p-2 rounded-lg">
             <ShieldCheck className="w-6 h-6 text-yellow-400" />
@@ -44,7 +39,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
          </div>
       </div>
 
-      {/* Navigation Links */}
       <nav className="flex-1 p-4 space-y-2">
         {menuItems.map((item) => {
           const isActive = pathname === item.href;
@@ -52,7 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => isMobile && setOpen(false)} // Mobile එකේදී click කළාම menu එක වැහෙනවා
+              onClick={() => isMobile && setOpen(false)}
               className={cn(
                 "flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 group",
                 isActive 
@@ -67,9 +61,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         })}
       </nav>
 
-      {/* Footer / Logout Button */}
       <div className="p-4 border-t border-red-900 bg-[#600000]/30">
-        <button className="flex items-center gap-3 px-4 py-3 text-red-200 hover:text-white w-full transition-all hover:bg-red-900/50 rounded-xl group">
+        <button 
+          onClick={async () => {
+            await logout(); // Clear secure cookie
+            router.push("/admin/login"); // Redirect to login
+          }}
+          className="flex items-center gap-3 px-4 py-3 text-red-200 hover:text-white w-full transition-all hover:bg-red-900/50 rounded-xl group"
+        >
           <LogOut className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
           <span className="font-medium text-sm">Sign Out</span>
         </button>
@@ -79,7 +78,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen flex bg-gray-50">
-      
       <aside className="w-72 hidden md:flex flex-col fixed h-full z-50 shadow-2xl border-r border-gray-200">
         <SidebarContent />
       </aside>
@@ -89,32 +87,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <ShieldCheck className="w-5 h-5 text-yellow-400" />
             <span className="font-bold text-lg">Admin Panel</span>
         </div>
-        
-        {/* Mobile Sidebar Trigger (Hamburger Menu) */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 -mr-2">
               <Menu className="w-6 h-6" />
             </Button>
           </SheetTrigger>
-          
-        
           <SheetContent side="left" className="p-0 w-72 border-r-0 bg-[#800000]">
-             <SheetHeader className="sr-only">
-                <SheetTitle>Navigation Menu</SheetTitle>
-             </SheetHeader>
+             <SheetHeader className="sr-only"><SheetTitle>Menu</SheetTitle></SheetHeader>
              <SidebarContent isMobile={true} />
           </SheetContent>
         </Sheet>
       </div>
 
-    
       <main className="flex-1 md:ml-72 transition-all duration-300">
         <div className="pt-16 md:pt-0 min-h-screen">
           {children}
         </div>
       </main>
-
     </div>
   );
 }

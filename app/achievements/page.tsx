@@ -1,5 +1,7 @@
+// app/achievements/page.tsx
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -18,218 +20,94 @@ import {
   BookOpenIcon,
   Squares2X2Icon 
 } from "@heroicons/react/24/solid";
+import { supabase } from "@/lib/supabase";
 
 // --- TYPE DEFINITIONS ---
 type AchievementItem = {
+  id: string;
   name: string;
   award: string;
   level: string;
   desc?: string;
   image?: string; 
-  type?: "music" | "drama" | "dance" | "media" | "sport" | "general"; 
+  type?: string; 
 };
 
-// --- DATA SOURCE ---
-const achievements: Record<string, { title: string; items: AchievementItem[] }[]> = {
-  sports: [
-    {
-      title: "Basketball Glory",
-      items: [
-        { 
-          name: "Melani Perera", 
-          desc: "Awarded 'Most Valuable Player' (MVP) of Western Province at the 49th National Sports Festival.",
-          award: "MVP Award", 
-          level: "National", 
-          image: "/images/achievements/basket-melani.jpg",
-          type: "sport"
-        },
-        { 
-          name: "Sithuki Sihansa Kodagoda", 
-          desc: "Selected to represent Sri Lanka at the 3x3 Basketball Championship - Asian Youth Games 2025 in Bahrain.",
-          award: "National Rep", 
-          level: "International", 
-          image: "/images/achievements/basket-sithuki.jpg",
-          type: "sport"
-        },
-        { 
-          name: "Yeheni Balalle", 
-          desc: "Selected for the Sri Lanka U16 National Basketball Team for the SABA Asian Qualifiers 2025 in Maldives.",
-          award: "National Rep", 
-          level: "International", 
-          image: "/images/achievements/basket-yeheni.jpg",
-          type: "sport"
-        },
-        { 
-          name: "Under 20 Basketball Team", 
-          desc: "Champions of the All Island Basketball Final 2025.",
-          award: "Champions", 
-          level: "All Island", 
-          image: "/images/achievements/basket-u20.jpg",
-          type: "sport"
-        },
-        { 
-          name: "Under 17 Basketball Team", 
-          desc: "Champions of the All Island National Level Championship.",
-          award: "Champions", 
-          level: "All Island", 
-          image: "/images/achievements/basket-u17.jpg",
-          type: "sport"
-        },
-      ]
-    }
-  ],
-  aesthetic: [
-    {
-      title: "Dancing Achievements",
-      items: [
-        { name: "'Tea Dalu' Performance", award: "1st Place", level: "All Island", image: "/images/achievements/dance-tea.jpg", type: "dance" },
-        { name: "'Paththini' Solo Dance", award: "1st Place", level: "All Island", image: "/images/achievements/dance-solo.jpg", type: "dance" },
-        { name: "'Nathi Linchi' Style", award: "2nd Place", level: "All Island", image: "/images/achievements/dance-group.jpg", type: "dance" },
-        { name: "'Kohu Industry' Dance", award: "1st Place", level: "Western Province", image: "/images/achievements/dance-kohu.jpg", type: "dance" },
-        { name: "'Kathak Paran'", award: "2nd Place", level: "Western Province", image: "/images/achievements/dance-kathak.jpg", type: "dance" },
-      ]
-    },
-    {
-      title: "Music Achievements",
-      items: [
-        { 
-          name: "Classical Music (Solo)", 
-          award: "1st Place", 
-          level: "Provincial", 
-          desc: "Achieved 1st place in the Junior category at the Provincial Level.", 
-          type: "music"
-        },
-        { 
-          name: "Classical Music (Solo) - Junior", 
-          award: "1st Place", 
-          level: "Zonal Level", 
-          desc: "Outstanding performance in the Junior classical music category.", 
-          type: "music" 
-        },
-        { 
-          name: "Classical Music (Solo) - Senior", 
-          award: "1st Place", 
-          level: "Zonal Level", 
-          desc: "Top honors in the Senior classical music category.",
-          type: "music" 
-        },
-        { 
-          name: "Folk Music (Group) - Junior", 
-          award: "1st Place", 
-          level: "Zonal Level", 
-          desc: "Group performance securing 1st place at the Zonal competition.",
-          type: "music" 
-        },
-        { 
-          name: "Folk Music (Group) - Junior", 
-          award: "3rd Place", 
-          level: "Provincial Level", 
-          desc: "Secured 3rd place in the highly competitive Provincial meet.",
-          type: "music" 
-        },
-      ]
-    },
-    {
-      title: "Drama & Theatre",
-      items: [
-        { 
-          name: "Miming (Solo) - Senior", 
-          award: "2nd Place", 
-          level: "All Island", 
-          desc: "National level recognition for exceptional miming skills.",
-          image: "/images/achievements/drama-miming.jpg", 
-          type: "drama" 
-        },
-        { 
-          name: "Miming (Solo) - Senior", 
-          award: "1st Place", 
-          level: "Provincial Level", 
-          desc: "Winner of the Provincial level miming competition.",
-          type: "drama" 
-        },
-        { 
-          name: "Character Modeling (Solo)", 
-          award: "2nd Place", 
-          level: "Provincial Level", 
-          desc: "Junior category achievement in character modeling.",
-          type: "drama" 
-        }
-      ]
-    }
-  ],
-  cocurricular: [
-    {
-      title: "English Drama Competitions",
-      items: [
-        { 
-          name: "'Macbeth' (Senior)", 
-          award: "1st Place", 
-          level: "Zonal Level", 
-          desc: "Outstanding performance by the Senior English Drama troupe.",
-          image: "/images/achievements/drama-macbeth.jpg", 
-          type: "drama"
-        },
-        { 
-          name: "'Emno' (Junior)", 
-          award: "1st Place", 
-          level: "Zonal Level", 
-          desc: "Junior team secured victory with their performance of 'Emno'.",
-          type: "drama" 
-        },
-        { 
-          name: "Primary Drama", 
-          award: "1st Place", 
-          level: "Divisional Level", 
-          desc: "Primary students showing excellence in divisional drama.",
-          type: "drama" 
-        },
-        { 
-          name: "Primary Drama", 
-          award: "3rd Place", 
-          level: "Zonal Level", 
-          desc: "Placed 3rd in the Zonal level primary competitions.",
-          type: "drama" 
-        },
-      ]
-    },
-    {
-      title: "Media Unit Excellence",
-      items: [
-        { 
-          name: "Dhara '25 Competition", 
-          award: "Multiple Wins", 
-          level: "All Island", 
-          desc: "Senina Weerasinghe (2nd Announcing), Asisya Perera (2nd Dubbing), Salma Asfar (3rd Editing). Organized by Christ Church Girls' College.", 
-          image: "/images/achievements/media-dhara.jpg",
-          type: "media"
-        },
-        { 
-          name: "Abhinav '25 Competition", 
-          award: "Multiple Wins", 
-          level: "All Island", 
-          desc: "Asisya Perera (1st Dubbing), Senina Weerasinghe (2nd Announcing). Organized by Negombo South International School.", 
-          image: "/images/achievements/media-abhinav.jpg",
-          type: "media"
-        },
-        { 
-          name: "Radio Presenting (NIE)", 
-          award: "A Grade", 
-          level: "National", 
-          desc: "P.M. Saheli (Sinhala), Manuthi Sethnara (English), Tenuli Wivantha (English). Teacher Mr. Tissa Wijesuriya (B Grade).", 
-          image: "/images/achievements/media-radio.jpg",
-          type: "media"
-        },
-      ]
-    }
-  ]
+type GroupedAchievement = {
+  title: string;
+  items: AchievementItem[];
 };
 
 export default function AchievementsPage() {
+  // Use keys matching the Tabs: sports, aesthetic, cocurricular
+  const [achievementsData, setAchievementsData] = useState<Record<string, GroupedAchievement[]>>({
+    sports: [],
+    aesthetic: [],
+    cocurricular: [] 
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from('achievements')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (data) {
+        // Initialize grouped structure
+        const grouped: Record<string, GroupedAchievement[]> = { 
+            sports: [], 
+            aesthetic: [], 
+            cocurricular: [] 
+        };
+        
+        data.forEach((item) => {
+          // Map DB 'academic' category to UI 'cocurricular' tab
+          let catKey = item.category;
+          if (catKey === 'academic') catKey = 'cocurricular';
+
+          // Ensure the category key exists in our structure
+          if (grouped[catKey]) {
+            let group = grouped[catKey].find(g => g.title === item.sub_category);
+            if (!group) {
+              group = { title: item.sub_category, items: [] };
+              grouped[catKey].push(group);
+            }
+            group.items.push({
+              id: item.id,
+              name: item.name,
+              award: item.award,
+              level: item.level,
+              desc: item.description,
+              image: item.image_url,
+              type: item.type
+            });
+          }
+        });
+        setAchievementsData(grouped);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const containerVariants = { 
+    hidden: { opacity: 0 }, 
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } } 
+  };
+  
+  const itemVariants = { 
+    hidden: { y: 20, opacity: 0 }, 
+    visible: { y: 0, opacity: 1 } 
+  };
+
   return (
     <main className="overflow-x-hidden bg-gray-50 min-h-screen flex flex-col pt-[80px]">
       <Navbar />
 
-      {/* --- HERO SECTION --- */}
+      {/* --- HERO SECTION (Matches Original) --- */}
       <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden flex items-center justify-center">
         <motion.div 
           initial={{ scale: 1.1 }}
@@ -237,11 +115,13 @@ export default function AchievementsPage() {
           transition={{ duration: 1.5, ease: "easeOut" }}
           className="absolute inset-0 w-full h-full"
         >
+          {/* Using a placeholder or the original image if available */}
+          <div className="absolute inset-0 bg-gray-900" /> 
           <Image
-            src="/images/IMG_6159.JPG"
+            src="/images/IMG_6159.JPG" // Ensure this image exists in public/images
             alt="Achievements Hero"
             fill
-            className="object-cover"
+            className="object-cover opacity-60"
             priority
           />
         </motion.div>
@@ -265,7 +145,7 @@ export default function AchievementsPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <p className="text-lg md:text-2xl text-yellow-300 font-serif italic max-w-3xl mx-auto drop-shadow-md">
-              "Celebrating the brilliance, talent, and dedication of our Josephian stars."
+              &quot;Celebrating the brilliance, talent, and dedication of our Josephian stars.&quot;
             </p>
           </motion.div>
           <motion.div 
@@ -286,7 +166,6 @@ export default function AchievementsPage() {
           <div className="flex justify-center mb-12">
             <TabsList className="flex flex-wrap justify-center w-full max-w-4xl h-auto gap-2 p-2 bg-white rounded-2xl md:rounded-full shadow-md border border-gray-100">
               
-              {/* "ALL" Button - Full width on Mobile, Auto on Desktop */}
               <TabsTrigger 
                 value="all" 
                 className="w-full md:w-auto md:flex-1 min-w-[100px] text-sm md:text-lg px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-gray-800 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
@@ -294,7 +173,6 @@ export default function AchievementsPage() {
                 <Squares2X2Icon className="w-5 h-5" /> All
               </TabsTrigger>
 
-              {/* Other Buttons - Shared Row on Mobile */}
               <TabsTrigger 
                 value="sports" 
                 className="flex-1 min-w-[90px] md:min-w-[120px] text-sm md:text-lg px-3 md:px-4 py-3 rounded-xl md:rounded-full data-[state=active]:bg-blue-600 data-[state=active]:text-white transition-all flex items-center justify-center gap-2"
@@ -318,103 +196,113 @@ export default function AchievementsPage() {
 
           {/* --- ALL CONTENT TAB --- */}
           <TabsContent value="all" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-             
-             {/* Sports Section in All */}
-             {achievements.sports.map((section, idx) => (
-              <div key={`all-sport-${idx}`}>
-                <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-blue-600 rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Sports)</span></h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-blue-600" />
-                  ))}
-                </div>
-              </div>
-            ))}
+             {loading ? (
+                <div className="text-center py-20 text-gray-400">Loading achievements...</div>
+             ) : (
+                <>
+                    {/* Sports Section in All */}
+                    {achievementsData.sports.map((section, idx) => (
+                    <div key={`all-sport-${idx}`}>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-8 w-2 md:h-10 bg-blue-600 rounded-full"></div>
+                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                {section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Sports)</span>
+                            </h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        {section.items.map((item, i) => (
+                            <AchievementCard key={item.id} item={item} colorClass="bg-blue-600" variants={itemVariants} />
+                        ))}
+                        </div>
+                    </div>
+                    ))}
 
-            {/* Aesthetic Section in All */}
-            {achievements.aesthetic.map((section, idx) => (
-              <div key={`all-aes-${idx}`}>
-                 <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-[#800000] rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Aesthetic)</span></h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-[#800000]" />
-                  ))}
-                </div>
-              </div>
-            ))}
+                    {/* Aesthetic Section in All */}
+                    {achievementsData.aesthetic.map((section, idx) => (
+                    <div key={`all-aes-${idx}`}>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-8 w-2 md:h-10 bg-[#800000] rounded-full"></div>
+                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                {section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Aesthetic)</span>
+                            </h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        {section.items.map((item, i) => (
+                            <AchievementCard key={item.id} item={item} colorClass="bg-[#800000]" variants={itemVariants} />
+                        ))}
+                        </div>
+                    </div>
+                    ))}
 
-            {/* Co-Curricular Section in All */}
-            {achievements.cocurricular.map((section, idx) => (
-              <div key={`all-co-${idx}`}>
-                <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-green-600 rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Co-Curricular)</span></h3>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-green-600" />
-                  ))}
-                </div>
-              </div>
-            ))}
-
+                    {/* Co-Curricular Section in All */}
+                    {achievementsData.cocurricular.map((section, idx) => (
+                    <div key={`all-co-${idx}`}>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="h-8 w-2 md:h-10 bg-green-600 rounded-full"></div>
+                            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                                {section.title} <span className="text-sm font-normal text-gray-500 ml-2">(Co-Curricular)</span>
+                            </h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                        {section.items.map((item, i) => (
+                            <AchievementCard key={item.id} item={item} colorClass="bg-green-600" variants={itemVariants} />
+                        ))}
+                        </div>
+                    </div>
+                    ))}
+                </>
+             )}
           </TabsContent>
 
 
           {/* --- SPORTS TAB --- */}
           <TabsContent value="sports" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {achievements.sports.map((section, idx) => (
-              <div key={idx}>
+            {achievementsData.sports.map((section, idx) => (
+              <motion.div key={idx} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-blue-600 rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
+                    <div className="h-8 w-2 md:h-10 bg-blue-600 rounded-full"></div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-blue-600" />
+                  {section.items.map((item) => (
+                    <AchievementCard key={item.id} item={item} colorClass="bg-blue-600" variants={itemVariants} />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </TabsContent>
 
           {/* --- AESTHETIC TAB --- */}
           <TabsContent value="aesthetic" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {achievements.aesthetic.map((section, idx) => (
-              <div key={idx}>
-                 <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-[#800000] rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
+            {achievementsData.aesthetic.map((section, idx) => (
+              <motion.div key={idx} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="h-8 w-2 md:h-10 bg-[#800000] rounded-full"></div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-[#800000]" />
+                  {section.items.map((item) => (
+                    <AchievementCard key={item.id} item={item} colorClass="bg-[#800000]" variants={itemVariants} />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </TabsContent>
 
           {/* --- CO-CURRICULAR TAB --- */}
           <TabsContent value="cocurricular" className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            {achievements.cocurricular.map((section, idx) => (
-              <div key={idx}>
+            {achievementsData.cocurricular.map((section, idx) => (
+              <motion.div key={idx} variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                 <div className="flex items-center gap-3 mb-8">
-                   <div className="h-8 w-2 md:h-10 bg-green-600 rounded-full"></div>
-                   <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
+                    <div className="h-8 w-2 md:h-10 bg-green-600 rounded-full"></div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">{section.title}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {section.items.map((item, i) => (
-                    <AchievementCard key={i} item={item} colorClass="bg-green-600" />
+                  {section.items.map((item) => (
+                    <AchievementCard key={item.id} item={item} colorClass="bg-green-600" variants={itemVariants} />
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </TabsContent>
 
@@ -426,8 +314,8 @@ export default function AchievementsPage() {
   );
 }
 
-// --- INTELLIGENT CARD COMPONENT (Handles Missing Images) ---
-function AchievementCard({ item, colorClass }: { item: AchievementItem, colorClass: string }) {
+// --- INTELLIGENT CARD COMPONENT ---
+function AchievementCard({ item, colorClass, variants }: { item: AchievementItem, colorClass: string, variants?: any }) {
   
   // Helper to get Icon based on type
   const getIcon = (type?: string) => {
@@ -443,29 +331,21 @@ function AchievementCard({ item, colorClass }: { item: AchievementItem, colorCla
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.4 }}
+      variants={variants}
       className="h-full"
     >
       <Card className={`overflow-hidden h-full border-t-4 border-t-transparent shadow-lg hover:shadow-2xl transition-all duration-300 bg-white group flex flex-col`}>
-        
-        {/* IMAGE AREA - Handles both Image and Fallback Icon */}
-        <div className="relative h-48 md:h-56 w-full bg-gray-100 overflow-hidden">
+        <div className="relative h-64 w-full bg-gray-50 overflow-hidden flex items-center justify-center border-b border-gray-100">
            
            {item.image ? (
-             <>
                 <Image 
                   src={item.image} 
                   alt={item.name} 
                   fill 
-                  className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                  className="object-contain p-2 transition-transform duration-700 group-hover:scale-105" 
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  unoptimized
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
-             </>
            ) : (
              // --- FALLBACK FOR MISSING IMAGES ---
              <div className={`absolute inset-0 ${colorClass} bg-opacity-90 flex flex-col items-center justify-center p-4 text-center`}>

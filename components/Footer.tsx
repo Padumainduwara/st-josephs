@@ -85,12 +85,12 @@ export default function Footer() {
           {/* Developer Credits (Standard Format) */}
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-4 text-center md:text-right order-1 md:order-2">
             <p>
-              Developed by <a href="https://axioralabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:text-yellow-400 transition-colors">Axiora Labs</a>
-            </p>
+              Designed by <a href="https://padumainduwara.me" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:text-yellow-400 transition-colors">Paduma Induwara</a>
+            </p>            
             <span className="hidden sm:inline text-gray-500">|</span>
             <p>
-              Designed by <a href="https://padumainduwara.me" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors border-b border-transparent hover:border-yellow-400">Paduma Induwara</a>
-            </p>
+              Developed by <a href="https://axioralabs.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-white hover:text-yellow-400 transition-colors">Axiora Labs</a>
+            </p>           
           </div>
 
         </div>

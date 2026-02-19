@@ -51,13 +51,12 @@ export default function LatestEvents() {
               className="inline-block"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-primary">
-            Latest Events
+             Latest Events
           </h2>
           <p className="text-lg text-gray-600 mt-2">
             Stay informed about the latest events, announcements, and activities at St. Joseph's. 
           </p>
-              <div className="h-1 w-24 bg-yellow-400 mx-auto rounded-full" />
-            </motion.div>
+          </motion.div>
         </div>
 
         {/* --- Events Grid (No Carousel) --- */}
