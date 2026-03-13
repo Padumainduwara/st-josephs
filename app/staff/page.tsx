@@ -22,10 +22,26 @@ import { Badge } from "@/components/ui/badge";
 // --- DATA LISTS ---
 
 const deputyPrincipals = [
-  { name: "Mrs. Subhashini Perera", role: "Deputy Principal" },
-  { name: "Mrs. Anuradha Rathnayaka", role: "Deputy Principal" },
-  { name: "Mrs. Waruni Wickramasinghe", role: "Deputy Principal" },
-  { name: "Mrs. Rasanjali Jayathilaka", role: "Deputy Principal" },
+  { 
+    name: "Mrs. Subhashini Perera", 
+    role: "Deputy Principal",
+    image: "/images/staff/subashini.jpg" // මෙතනට ඔයාගේ photo එකේ නම දෙන්න
+  },
+  { 
+    name: "Mrs. Anuradha Rathnayaka", 
+    role: "Deputy Principal",
+    image: "/images/staff/anuradha.jpg" 
+  },
+  { 
+    name: "Mrs. Waruni Wickramasinghe", 
+    role: "Deputy Principal",
+    image: "/images/staff/waruni.jpg" 
+  },
+  { 
+    name: "Mrs. Rasanjali Jayathilaka", 
+    role: "Deputy Principal",
+    image: "/images/staff/rasanjali.jpg" 
+  },
 ];
 
 const assistantPrincipals = [
@@ -306,9 +322,20 @@ export default function StaffPage() {
                <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#800000]/5 to-transparent pointer-events-none" />
                
               <CardContent className="pt-6 relative z-10">
-                <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center mb-6 border-4 border-[#800000] shadow-lg">
-                   <UserIcon className="h-16 w-16 text-[#800000]" />
+                
+                {/* --- Aluth Image Section Eka (Poddak Loku Karala) --- */}
+                <div className="w-40 h-40 md:w-48 md:h-48 mx-auto bg-white rounded-full flex items-center justify-center mb-6 border-4 border-[#800000] shadow-xl relative overflow-hidden">
+                  <Image 
+                    src="/images/staff/rupa.jpg" 
+                    alt="Mrs. Rupa Rohini Silva"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
                 </div>
+                {/* ------------------------------- */}
+
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Mrs. Rupa Rohini Silva</h3>
                 <Badge className="bg-[#800000] hover:bg-[#600000] text-white text-base px-8 py-2 rounded-full shadow-md">
                   Principal
@@ -334,9 +361,24 @@ export default function StaffPage() {
               >
                 <Card className="text-center h-full bg-white border-t-4 border-t-yellow-500 shadow-xl hover:shadow-2xl transition-all p-6 hover:-translate-y-2 duration-300">
                   <CardContent className="pt-4">
-                    <div className="w-20 h-20 mx-auto bg-yellow-50 rounded-full flex items-center justify-center mb-4 border-2 border-yellow-200">
-                      <StarIcon className="h-10 w-10 text-yellow-600" />
+                    
+                    {/* --- Aluth Image Section Eka --- */}
+                    <div className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full mb-4 border-4 border-yellow-200 overflow-hidden relative shadow-md bg-yellow-50 flex items-center justify-center">
+                      {deputy.image ? (
+                        <Image 
+                          src={deputy.image} 
+                          alt={deputy.name}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        // Photo ekak danna amathaka unoth parana star icon eka pennanawa
+                        <StarIcon className="h-12 w-12 md:h-16 md:w-16 text-yellow-600" />
+                      )}
                     </div>
+                    {/* ------------------------------- */}
+
                     <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{deputy.name}</h3>
                     <p className="text-yellow-700 font-semibold bg-yellow-50 inline-block px-3 py-1 rounded-full text-xs md:text-sm">
                       {deputy.role}
@@ -365,7 +407,7 @@ export default function StaffPage() {
                 <Card className="text-center h-full bg-white border-t-4 border-t-purple-600 shadow-xl hover:shadow-2xl transition-all p-6 hover:-translate-y-2 duration-300">
                   <CardContent className="pt-4">
                     <div className="w-20 h-20 mx-auto bg-purple-50 rounded-full flex items-center justify-center mb-4 border-2 border-purple-200">
-                      <SparklesIcon className="h-10 w-10 text-purple-600" />
+                      <UserIcon className="h-10 w-10 text-purple-600" />
                     </div>
                     <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2">{assistant.name}</h3>
                     <p className="text-purple-700 font-semibold bg-purple-50 inline-block px-3 py-1 rounded-full text-xs md:text-sm">
