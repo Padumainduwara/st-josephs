@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion"; 
-import { AcademicCapIcon, SparklesIcon, TrophyIcon } from "@heroicons/react/24/solid";
+import { AcademicCapIcon, UsersIcon, TrophyIcon } from "@heroicons/react/24/solid";
 
 // shadcn/ui Card components
 import {
@@ -36,7 +36,7 @@ export default function CoreValues() {
     },
     {
       // REMOVED "text-primary" from className here
-      icon: <SparklesIcon className="h-10 w-10" />,
+      icon: <UsersIcon className="h-10 w-10" />,
       title: "Strong Values",
       description:
         "Nurturing discipline, respect, and integrity in a faith-based environment.",

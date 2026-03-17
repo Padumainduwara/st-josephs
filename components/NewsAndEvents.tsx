@@ -186,21 +186,19 @@ export default function NewsAndEvents() {
           {selectedNews && (
             <>
               {/* Header / Image Area */}
-              <div className="relative">
+              <div className="relative bg-gray-900">
                 {selectedNews.image_url ? (
-                  <div className="relative w-full h-48 md:h-64 bg-gray-100">
+                  <div className="relative w-full h-[250px] sm:h-[300px] md:h-[400px]">
                     <Image 
                       src={selectedNews.image_url} 
                       alt={selectedNews.title} 
                       fill 
-                      className="object-cover"
+                      className="object-contain" 
                       unoptimized 
                     />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
                   </div>
                 ) : (
-                  /* Fallback Header */
                   <div className="w-full h-32 bg-[#800000] relative overflow-hidden">
                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
                   </div>
