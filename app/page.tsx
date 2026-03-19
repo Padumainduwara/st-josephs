@@ -9,6 +9,7 @@ import CoreValues from "@/components/CoreValues";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LatestEvents from "@/components/LatestEvents";
+import LiveEventModal from "@/components/LiveEventModal";
 
 export const metadata: Metadata = {
   title: "Home | St. Joseph's Girls' School Nugegoda",
@@ -125,6 +126,10 @@ export default function Home() {
       
       <section className="py-0 bg-gray-50" id="news" aria-label="Latest News and Upcoming Events">
         <NewsAndEvents />
+      </section>
+
+      <section>
+        <LiveEventModal />
       </section>
 
       <section className="py-0" aria-label="Latest Events at St. Joseph's Girls' School">
