@@ -78,7 +78,7 @@ export default function LiveEventModal() {
 
               {/* --- YouTube Video Embed --- */}
               <div className="relative w-full aspect-video bg-black flex items-center justify-center flex-grow">
-                {/* Video එක එනකම් Loading Spinner එකක් පෙන්නනවා, එතකොට User ට හිර වුණා කියලා හිතෙන්නේ නෑ */}
+                {/* Video එක එනකම් Loading Spinner එකක් පෙන්නනවා */}
                 {!showVideo && (
                   <div className="absolute flex flex-col items-center justify-center text-white/50">
                     <Loader2 className="w-8 h-8 animate-spin mb-2" />
@@ -88,14 +88,16 @@ export default function LiveEventModal() {
                 
                 {/* Modal Animation එක ඉවර වුණාට පස්සේ මේක ලෝඩ් වෙනවා */}
                 {showVideo && (
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]"
+                  <motion.iframe
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute top-0 left-0 w-full h-full"
                     src="https://www.youtube.com/embed/kArJrqb_Z2I?autoplay=1&mute=0&rel=0&vq=hd1080"
                     title="St. Joseph's 84th Anniversary Live"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    loading="lazy"
-                  ></iframe>
+                  ></motion.iframe>
                 )}
               </div>
               
