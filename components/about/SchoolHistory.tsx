@@ -20,7 +20,14 @@ export default function SchoolHistory() {
           <p>
             As far back as 1930, the need for English education for children in Nugegoda area was greatest. This first started with the intervention of Mrs. Raymond Guru in a small house with a sheet roof on the ground of St. Joseph's Church on Raymond Road. It was blessed under the name of <span className="font-semibold text-brand-primary">Nugegoda St. Joseph's Convent</span>.
           </p>
-          <p>
+          
+<p>
+           Shortly after, Rev. Theobald de Silva and Rev. W.L. Dabarera made significant contributions to the development of the building. Mrs. E.T. Ranasinghe of Greenpath, Kohuwala who had passed the Cambridge Senior Examination and was a registered teacher also joined the teaching staff during this period.
+          </p>
+<p>
+            At that time, St. Joseph's School served both boys and girls as a source of knowledge. Mrs. Ranasinghe made a full contribution toward obtaining government registration as an aided school.
+          </p>
+<p>
             By the year 1942, due to the rapid increase in the number of students, the school was brought to its current location on Nugegoda High Level Road. On <strong>August 8, 1942</strong>, Archbishop Atigaru Mason blessed the first building on the new site.
           </p>
           <p>
