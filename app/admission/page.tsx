@@ -115,27 +115,23 @@ export default function AdmissionPage() {
 
           {/* Key Dates & Downloads (Maroon Box) */}
           <div className="max-w-4xl mx-auto bg-primary text-white p-8 md:p-12 rounded-2xl shadow-2xl text-center">
-             <h3 className="text-3xl font-bold mb-6 text-yellow-400">
+            <h3 className="text-3xl font-bold mb-6 text-yellow-400">
               Important Information
             </h3>
             <p className="text-lg text-white/90 mb-4">
-              Admissions for the 2026 academic year are now <strong>closed</strong>. 
+              <strong>2026 A/L Admissions will open soon.</strong>
             </p>
             <p className="text-lg text-white/90 mb-8">
-              Information regarding the next intake will be posted here and in national newspapers. 
-              Please check back later for updates.
+              Information regarding the upcoming Advanced Level intake will be posted here. Please check back later for updates.
             </p>
             
             <Button 
-  asChild 
-  size="lg" 
-  disabled 
-  className="text-lg bg-white text-primary hover:bg-gray-100 opacity-90 cursor-not-allowed shadow-md whitespace-normal h-auto py-4 text-center leading-tight"
->
-  <Link href="#">
-    Download Application Form
-  </Link>
-</Button>
+              size="lg" 
+              disabled 
+              className="text-lg bg-white/80 text-primary cursor-not-allowed shadow-md whitespace-normal h-auto py-4 px-8 text-center leading-tight"
+            >
+              Application Form
+            </Button>
           </div>
 
         </div>
