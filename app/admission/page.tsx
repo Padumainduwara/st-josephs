@@ -119,18 +119,24 @@ export default function AdmissionPage() {
               Important Information
             </h3>
             <p className="text-lg text-white/90 mb-4">
-              <strong>2026 A/L Admissions will open soon.</strong>
+              <strong>2026 A/L Admissions are now open!</strong>
             </p>
             <p className="text-lg text-white/90 mb-8">
-              Information regarding the upcoming Advanced Level intake will be posted here. Please check back later for updates.
+              Please click the button below to fill out the online application form. Make sure to have all necessary details ready before starting.
             </p>
             
             <Button 
+              asChild
               size="lg" 
-              disabled 
-              className="text-lg bg-white/80 text-primary cursor-not-allowed shadow-md whitespace-normal h-auto py-4 px-8 text-center leading-tight"
+              className="text-lg bg-white text-primary hover:bg-gray-100 shadow-md whitespace-normal h-auto py-4 px-8 text-center leading-tight transition-transform hover:scale-105"
             >
-              Application Form
+              <a 
+                href="https://docs.google.com/forms/d/e/1FAIpQLScRUsBSc6BLCMqXOg4x3llLAoVZfMZCRczHsMxPTnYsevCG2w/viewform" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Fill Application Form
+              </a>
             </Button>
           </div>
 
