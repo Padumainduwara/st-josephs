@@ -9,7 +9,6 @@ import CoreValues from "@/components/CoreValues";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LatestEvents from "@/components/LatestEvents";
-import MemorialModal from "@/components/MemorialModal";
 
 export const metadata: Metadata = {
   title: "Home | St. Joseph's Girls' School Nugegoda",
@@ -93,7 +92,6 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col">
-      <MemorialModal />
       {/* Inject Advanced Schema */}
       <script
           type="application/ld+json"
