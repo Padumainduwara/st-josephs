@@ -119,24 +119,18 @@ export default function AdmissionPage() {
               Important Information
             </h3>
             <p className="text-lg text-white/90 mb-4">
-              <strong>2026 A/L Admissions are now open!</strong>
+              <strong>2027 A/L Admissions - Coming Soon!</strong>
             </p>
             <p className="text-lg text-white/90 mb-8">
-              Please click the button below to fill out the online application form. Make sure to have all necessary details ready before starting.
+              The 2026 A/L admission process has concluded. Please stay tuned for updates regarding the 2027 A/L application process.
             </p>
             
             <Button 
-              asChild
+              disabled
               size="lg" 
-              className="text-lg bg-white text-primary hover:bg-gray-100 shadow-md whitespace-normal h-auto py-4 px-8 text-center leading-tight transition-transform hover:scale-105"
+              className="text-lg bg-gray-300 text-gray-500 cursor-not-allowed shadow-none whitespace-normal h-auto py-4 px-8 text-center leading-tight"
             >
-              <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLScRUsBSc6BLCMqXOg4x3llLAoVZfMZCRczHsMxPTnYsevCG2w/viewform" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Fill Application Form
-              </a>
+              Coming Soon
             </Button>
           </div>
 
